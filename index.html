@@ -721,9 +721,146 @@
       .form-row { grid-template-columns: 1fr; }
     }
 
-    /* ════════════════════════════════════════
-       MOBILE RESPONSIVE — Complete
-    ════════════════════════════════════════ */
+    /* ─── BLOG SECTION ─── */
+    .blog-bg { background: rgba(8,18,36,0.6); }
+    .blog-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; flex-wrap: wrap; gap: 20px; }
+    .blog-header-text {}
+    .blog-view-all {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--blue-light); text-decoration: none;
+      font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      border: 1px solid rgba(66,165,245,0.3); border-radius: 8px;
+      padding: 10px 20px; transition: all 0.25s; white-space: nowrap;
+    }
+    .blog-view-all:hover { background: rgba(66,165,245,0.1); border-color: var(--blue-light); }
+
+    /* filter tabs */
+    .blog-filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+    .blog-filter-btn {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 100px; padding: 8px 20px;
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600;
+      color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+      letter-spacing: 0.05em;
+    }
+    .blog-filter-btn:hover { border-color: var(--blue-light); color: var(--blue-light); }
+    .blog-filter-btn.active {
+      background: rgba(21,101,192,0.2); border-color: var(--blue-light);
+      color: var(--blue-light);
+    }
+
+    /* grid */
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+    /* featured first card spans 2 cols */
+    .blog-card-featured { grid-column: span 2; }
+
+    .blog-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      transition: all 0.3s; cursor: pointer;
+      display: flex; flex-direction: column;
+    }
+    .blog-card:hover { border-color: rgba(21,101,192,0.4); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
+
+    .blog-card-img {
+      width: 100%; aspect-ratio: 16/9; object-fit: cover;
+      background: linear-gradient(135deg, rgba(21,101,192,0.2), rgba(10,22,40,0.8));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; flex-shrink: 0;
+      position: relative; overflow: hidden;
+    }
+    .blog-card-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(10,22,40,0.6) 100%);
+    }
+    .blog-card-featured .blog-card-img { aspect-ratio: 21/9; font-size: 72px; }
+
+    .blog-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .blog-card-featured .blog-card-body { padding: 28px 32px; }
+
+    .blog-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .blog-cat {
+      background: rgba(21,101,192,0.2); color: var(--blue-light);
+      border: 1px solid rgba(21,101,192,0.3);
+      border-radius: 100px; padding: 3px 12px;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .blog-cat.purview { background: rgba(21,101,192,0.2); color: var(--blue-light); border-color: rgba(21,101,192,0.3); }
+    .blog-cat.defender { background: rgba(211,47,47,0.15); color: #EF9A9A; border-color: rgba(211,47,47,0.3); }
+    .blog-cat.intune { background: rgba(0,150,136,0.15); color: #80CBC4; border-color: rgba(0,150,136,0.3); }
+    .blog-cat.mim { background: rgba(106,27,154,0.15); color: #CE93D8; border-color: rgba(106,27,154,0.3); }
+    .blog-cat.general { background: rgba(245,124,0,0.15); color: var(--orange-light); border-color: rgba(245,124,0,0.3); }
+
+    .blog-date { font-size: 12px; color: var(--text-muted); font-family: 'Montserrat', sans-serif; }
+
+    .blog-title {
+      font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 700;
+      color: var(--white); line-height: 1.35; margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+    .blog-card:hover .blog-title { color: var(--blue-light); }
+    .blog-card-featured .blog-title { font-size: 22px; }
+
+    .blog-excerpt { font-size: 14px; color: var(--text-muted); line-height: 1.65; flex: 1; }
+
+    .blog-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
+    .blog-author { display: flex; align-items: center; gap: 8px; }
+    .blog-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; font-family: 'Montserrat', sans-serif;
+      color: white; flex-shrink: 0;
+    }
+    .blog-author-name { font-size: 12px; color: var(--text-muted); font-family: 'Montserrat', sans-serif; font-weight: 600; }
+    .blog-read-more {
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+      color: var(--blue-light); letter-spacing: 0.05em;
+      text-decoration: none; display: flex; align-items: center; gap: 4px;
+    }
+
+    /* loading skeleton */
+    .blog-skeleton { animation: shimmer 1.5s infinite; }
+    @keyframes shimmer {
+      0% { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+    .blog-skeleton .blog-card-img {
+      background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 75%);
+      background-size: 400px 100%;
+    }
+    .skeleton-line {
+      height: 14px; border-radius: 6px; margin-bottom: 10px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 75%);
+      background-size: 400px 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    .skeleton-line.short { width: 60%; }
+    .skeleton-line.medium { width: 80%; }
+
+    /* blog empty/error state */
+    .blog-state {
+      grid-column: 1 / -1; text-align: center; padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    .blog-state-icon { font-size: 48px; margin-bottom: 16px; }
+    .blog-state-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+
+    /* responsive blog */
+    @media (max-width: 900px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+      .blog-card-featured { grid-column: span 2; }
+    }
+    @media (max-width: 600px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-card-featured { grid-column: span 1; }
+      .blog-card-featured .blog-title { font-size: 18px; }
+      .blog-card-featured .blog-card-body { padding: 20px; }
+      .blog-header { flex-direction: column; align-items: flex-start; }
+    }
 
     /* ── Hamburger Menu ── */
     .hamburger {
@@ -952,6 +1089,7 @@
     <li><a href="#defender">Defender</a></li>
     <li><a href="#intune">Intune</a></li>
     <li><a href="#mim">Identity Manager</a></li>
+    <li><a href="#blog">Blog</a></li>
     <li><a href="#services">บริการ</a></li>
     <li><a href="#contact">ติดต่อ</a></li>
   </ul>
@@ -970,6 +1108,7 @@
     <li><a href="#defender" onclick="closeDrawer()">🛡️ Defender</a></li>
     <li><a href="#intune" onclick="closeDrawer()">📱 Intune</a></li>
     <li><a href="#mim" onclick="closeDrawer()">⚙️ Identity Manager</a></li>
+    <li><a href="#blog" onclick="closeDrawer()">✍️ Blog</a></li>
     <li><a href="#services" onclick="closeDrawer()">📋 บริการ</a></li>
     <li><a href="#contact" onclick="closeDrawer()">📞 ติดต่อ</a></li>
   </ul>
@@ -1074,7 +1213,7 @@
   <div class="expertise-inner">
     <div class="expertise-text">
       <h2>ความเชี่ยวชาญของเรา</h2>
-      <p>ทีมงานผ่านการรับรองจาก Microsoft โดยตรง พร้อมประสบการณ์จริงจากร้อยกว่าโปรเจกต์</p>
+      <p>ทีมงานผ่านการรับรองจาก Microsoft Certificate โดยตรง พร้อมประสบการณ์จริงจากร้อยกว่าโปรเจกต์</p>
     </div>
     <div class="expertise-pills">
       <div class="pill">Microsoft Certified</div>
@@ -1645,6 +1784,69 @@
   </div>
 </div>
 
+<!-- BLOG -->
+<section id="blog" class="blog-bg">
+  <div class="container">
+    <div class="blog-header">
+      <div class="blog-header-text">
+        <div class="section-label">บทความและความรู้</div>
+        <h2 class="section-title">KTech Blog</h2>
+        <p class="section-sub" style="margin-top:12px;">อัปเดตความรู้ด้าน Microsoft Security, Purview, Defender และ Identity จากทีมผู้เชี่ยวชาญของเรา</p>
+      </div>
+      <a href="#blog" class="blog-view-all">ดูบทความทั้งหมด →</a>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="blog-filters">
+      <button class="blog-filter-btn active" onclick="filterBlog('all', this)">ทั้งหมด</button>
+      <button class="blog-filter-btn" onclick="filterBlog('purview', this)">Microsoft Purview</button>
+      <button class="blog-filter-btn" onclick="filterBlog('defender', this)">Defender</button>
+      <button class="blog-filter-btn" onclick="filterBlog('intune', this)">Intune</button>
+      <button class="blog-filter-btn" onclick="filterBlog('mim', this)">Identity Manager</button>
+      <button class="blog-filter-btn" onclick="filterBlog('general', this)">ทั่วไป</button>
+    </div>
+
+    <!-- Blog Grid — populated by JS -->
+    <div class="blog-grid" id="blogGrid">
+      <!-- Skeleton loading placeholders -->
+      <div class="blog-card blog-card-featured blog-skeleton">
+        <div class="blog-card-img"></div>
+        <div class="blog-card-body">
+          <div class="skeleton-line short" style="width:30%;height:10px;margin-bottom:14px;"></div>
+          <div class="skeleton-line" style="width:90%;height:20px;"></div>
+          <div class="skeleton-line" style="width:75%;height:20px;"></div>
+          <div class="skeleton-line medium" style="margin-top:10px;"></div>
+          <div class="skeleton-line" style="width:65%;"></div>
+        </div>
+      </div>
+      <div class="blog-card blog-skeleton">
+        <div class="blog-card-img"></div>
+        <div class="blog-card-body">
+          <div class="skeleton-line short" style="width:40%;height:10px;margin-bottom:14px;"></div>
+          <div class="skeleton-line" style="height:16px;"></div>
+          <div class="skeleton-line medium" style="height:16px;"></div>
+          <div class="skeleton-line" style="margin-top:10px;"></div>
+        </div>
+      </div>
+      <div class="blog-card blog-skeleton">
+        <div class="blog-card-img"></div>
+        <div class="blog-card-body">
+          <div class="skeleton-line short" style="width:40%;height:10px;margin-bottom:14px;"></div>
+          <div class="skeleton-line" style="height:16px;"></div>
+          <div class="skeleton-line medium" style="height:16px;"></div>
+          <div class="skeleton-line" style="margin-top:10px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sanity setup notice (hidden after config) -->
+    <div id="sanityNotice" style="display:none; margin-top:32px; background:rgba(245,124,0,0.08); border:1px solid rgba(245,124,0,0.25); border-radius:14px; padding:24px 28px;">
+      <p style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--orange-light);margin-bottom:8px;">⚙️ ต้องการ Setup Sanity CMS</p>
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.6;">แก้ไขค่า <code style="background:rgba(255,255,255,0.08);padding:2px 8px;border-radius:4px;color:var(--blue-light);">SANITY_PROJECT_ID</code> และ <code style="background:rgba(255,255,255,0.08);padding:2px 8px;border-radius:4px;color:var(--blue-light);">SANITY_DATASET</code> ในไฟล์ index.html เพื่อเชื่อมกับ Sanity CMS ของคุณ</p>
+    </div>
+  </div>
+</section>
+
 <!-- PROCESS -->
 <section id="process">
   <div class="container">
@@ -1769,7 +1971,9 @@
   <div class="footer-copy">© 2024 KTech IT and Service. All rights reserved.</div>
   <div class="footer-ms">
     <span class="ms-badge">Microsoft Solutions Partner</span>
-    <span class="ms-badge" style="background:rgba(245,124,0,0.12);border-color:rgba(245,124,0,0.3);color:var(--orange-light);">Purview Certified</span>
+    <span class="ms-badge" style="background:rgba(245,124,0,0.12);border-color:rgba(245,124,0,0.3);color:var(--orange-light);">Identity Certified</span>
+	<span class="ms-badge" style="background:rgba(245,124,0,0.12);border-color:rgba(245,124,0,0.3);color:var(--orange-light);">Security Certified</span>
+	<span class="ms-badge" style="background:rgba(245,124,0,0.12);border-color:rgba(245,124,0,0.3);color:var(--orange-light);">Compliance Certified</span>
   </div>
 </footer>
 
@@ -1837,6 +2041,122 @@
       }
     });
   });
+  // ════════════════════════════════════════
+  // SANITY CMS — Blog Integration
+  // ════════════════════════════════════════
+
+  // ── CONFIG: แก้ไขค่านี้หลัง setup Sanity ──
+  const SANITY_PROJECT_ID = 'YOUR_PROJECT_ID'; // เช่น 'abc123xyz'
+  const SANITY_DATASET    = 'production';
+  const SANITY_API_VER    = '2024-01-01';
+  // ──────────────────────────────────────────
+
+  const CATEGORY_MAP = {
+    purview:  { label: 'Microsoft Purview', icon: '🔒', cls: 'purview'  },
+    defender: { label: 'Defender',          icon: '🛡️', cls: 'defender' },
+    intune:   { label: 'Intune',            icon: '📱', cls: 'intune'   },
+    mim:      { label: 'Identity Manager',  icon: '⚙️', cls: 'mim'     },
+    general:  { label: 'ทั่วไป',            icon: '📝', cls: 'general'  },
+  };
+
+  const FALLBACK_POSTS = [
+    { _id:'1', featured:true,  category:'purview',  emoji:'🔒', title:'เริ่มต้นกับ Microsoft Purview: Data Governance สำหรับองค์กรไทย',                   excerpt:'Microsoft Purview คือศูนย์กลางการบริหารข้อมูลที่ครอบคลุมทั้ง Data Governance, Compliance และ Information Protection ในที่เดียว บทความนี้จะพาคุณเริ่มต้นวางรากฐาน Data Strategy ที่แข็งแกร่ง', author:'KT', authorName:'KTech Team',    date:'1 มี.ค. 2568',  readTime:'8 นาที' },
+    { _id:'2', featured:false, category:'defender', emoji:'🛡️', title:'Microsoft Defender XDR: ป้องกันภัยคุกคามแบบ 360°',                                 excerpt:'รู้จัก Extended Detection & Response และวิธีที่ Defender XDR ช่วยองค์กรตอบสนองต่อภัยคุกคามได้เร็วขึ้นกว่า 90%',                               author:'ST', authorName:'Security Team',  date:'15 ก.พ. 2568', readTime:'6 นาที' },
+    { _id:'3', featured:false, category:'intune',   emoji:'📱', title:'จัดการอุปกรณ์ BYOD ด้วย Microsoft Intune อย่างปลอดภัย',                            excerpt:'นโยบาย BYOD กำลังเป็นที่นิยมในองค์กรไทย — เรียนรู้วิธีแยก Corporate Data ออกจาก Personal App ด้วย MAM Policy',                               author:'IT', authorName:'Intune Team',    date:'5 ก.พ. 2568',  readTime:'5 นาที' },
+    { _id:'4', featured:false, category:'mim',      emoji:'⚙️', title:'HR-Driven Provisioning: Auto-สร้าง AD Account จาก HRMS',                           excerpt:'ลดภาระ IT ด้วยการเชื่อม MIM กับระบบ HRMS ให้สร้าง แก้ไข และปิด Account อัตโนมัติทุกครั้งที่มีการเปลี่ยนแปลงใน HR',                         author:'MT', authorName:'MIM Team',       date:'20 ม.ค. 2568', readTime:'7 นาที' },
+    { _id:'5', featured:false, category:'purview',  emoji:'📋', title:'PDPA กับ Microsoft Purview Compliance Manager: คู่มือฉบับสมบูรณ์',                  excerpt:'ใช้ Compliance Manager ใน Purview เพื่อประเมิน Gap และติดตาม Action Items สำหรับการปฏิบัติตาม พ.ร.บ. PDPA',                               author:'KT', authorName:'KTech Team',    date:'10 ม.ค. 2568', readTime:'10 นาที' },
+    { _id:'6', featured:false, category:'general',  emoji:'🌐', title:'Zero Trust Architecture: หลักการและการนำไปใช้จริงในองค์กร',                         excerpt:'Zero Trust ไม่ใช่แค่คำโฆษณา แต่คือกลยุทธ์ความปลอดภัยที่ Microsoft แนะนำสำหรับโลก Hybrid Work ยุคใหม่',                                    author:'KT', authorName:'KTech Team',    date:'2 ม.ค. 2568',  readTime:'9 นาที' },
+  ];
+
+  let allPosts = [];
+  let activeFilter = 'all';
+
+  function buildCard(post, isFeatured) {
+    const cat = CATEGORY_MAP[post.category] || CATEGORY_MAP.general;
+    const imgContent = post.imageUrl
+      ? `<img src="${post.imageUrl}" alt="${post.title}" style="width:100%;height:100%;object-fit:cover;">`
+      : `<span style="position:relative;z-index:1;font-size:${isFeatured?'72px':'48px'}">${post.emoji || cat.icon}</span>`;
+    return `<div class="blog-card ${isFeatured?'blog-card-featured':''}" data-cat="${post.category}" onclick="openPost('${post._id}')">
+      <div class="blog-card-img">${imgContent}<div class="blog-card-img-overlay"></div></div>
+      <div class="blog-card-body">
+        <div class="blog-meta">
+          <span class="blog-cat ${cat.cls}">${cat.icon} ${cat.label}</span>
+          <span class="blog-date">${post.date}</span>
+          ${post.readTime ? `<span class="blog-date">· ${post.readTime}</span>` : ''}
+        </div>
+        <div class="blog-title">${post.title}</div>
+        <div class="blog-excerpt">${post.excerpt}</div>
+        <div class="blog-footer">
+          <div class="blog-author">
+            <div class="blog-avatar">${post.author}</div>
+            <span class="blog-author-name">${post.authorName}</span>
+          </div>
+          <span class="blog-read-more">อ่านต่อ →</span>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderPosts(posts) {
+    const grid = document.getElementById('blogGrid');
+    if (!posts || posts.length === 0) {
+      grid.innerHTML = `<div class="blog-state"><div class="blog-state-icon">📭</div><div class="blog-state-title">ยังไม่มีบทความ</div><p>เริ่มเขียนบทความแรกใน Sanity Studio ได้เลย</p></div>`;
+      return;
+    }
+    grid.innerHTML = posts.map((p, i) => buildCard(p, i === 0 && activeFilter === 'all')).join('');
+  }
+
+  function filterBlog(cat, btn) {
+    activeFilter = cat;
+    document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderPosts(cat === 'all' ? allPosts : allPosts.filter(p => p.category === cat));
+  }
+
+  function openPost(id) {
+    const post = allPosts.find(p => p._id === id);
+    if (post) {
+      const slug = post.slug || post._id;
+      // เมื่อ Setup Sanity แล้ว เปลี่ยนเป็น: window.location.href = `/blog/${slug}`;
+      alert(`📖 "${post.title}"\n\nSetup Sanity CMS แล้ว uncomment บรรทัด redirect ใน openPost() ครับ`);
+    }
+  }
+
+  async function fetchSanityPosts() {
+    if (SANITY_PROJECT_ID === 'YOUR_PROJECT_ID') {
+      document.getElementById('sanityNotice').style.display = 'block';
+      allPosts = FALLBACK_POSTS;
+      renderPosts(allPosts);
+      return;
+    }
+    try {
+      const query = encodeURIComponent(`*[_type=="post"]|order(publishedAt desc)[0..8]{_id,title,excerpt,publishedAt,category,"slug":slug.current,"author":author->name,"authorInitials":author->initials,"imageUrl":mainImage.asset->url,readTime}`);
+      const res  = await fetch(`https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VER}/data/query/${SANITY_DATASET}?query=${query}`);
+      const data = await res.json();
+      if (data.result?.length > 0) {
+        allPosts = data.result.map(p => ({
+          _id: p._id, slug: p.slug, category: p.category || 'general',
+          emoji: CATEGORY_MAP[p.category]?.icon || '📝',
+          title: p.title, excerpt: p.excerpt || '',
+          author: (p.authorInitials || p.author?.slice(0,2) || 'KT').toUpperCase(),
+          authorName: p.author || 'KTech Team',
+          date: p.publishedAt ? new Date(p.publishedAt).toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'numeric'}) : '',
+          readTime: p.readTime ? `${p.readTime} นาที` : '',
+          imageUrl: p.imageUrl || null,
+        }));
+      } else {
+        allPosts = FALLBACK_POSTS;
+      }
+    } catch(e) {
+      console.warn('Sanity fetch error:', e);
+      allPosts = FALLBACK_POSTS;
+    }
+    renderPosts(allPosts);
+  }
+
+  fetchSanityPosts();
+
+  // ── Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {

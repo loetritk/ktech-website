@@ -413,7 +413,135 @@
     }
 
     /* ─── RESPONSIVE ─── */
+    /* ─── DEFENDER SECTION ─── */
+    .defender-bg { background: rgba(8,18,36,0.7); }
+    .defender-hero {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; margin-bottom: 64px;
+    }
+    .defender-badge-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .def-badge {
+      background: rgba(211,47,47,0.15); border: 1px solid rgba(211,47,47,0.4);
+      color: #EF9A9A; padding: 5px 14px; border-radius: 100px;
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    }
+    .defender-visual {
+      background: rgba(211,47,47,0.05); border: 1px solid rgba(211,47,47,0.15);
+      border-radius: 20px; padding: 36px; position: relative; overflow: hidden;
+    }
+    .defender-visual::before {
+      content: '🛡️'; position: absolute; right: -10px; top: -10px;
+      font-size: 120px; opacity: 0.06;
+    }
+    .defender-product-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .def-product {
+      background: rgba(211,47,47,0.08); border: 1px solid rgba(211,47,47,0.2);
+      border-radius: 12px; padding: 20px 16px; text-align: center;
+      transition: all 0.3s;
+    }
+    .def-product:hover { background: rgba(211,47,47,0.15); border-color: rgba(211,47,47,0.4); transform: translateY(-3px); }
+    .def-product-icon { font-size: 28px; margin-bottom: 10px; }
+    .def-product-name {
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
+      color: #EF9A9A; line-height: 1.3;
+    }
+    .defender-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 0; }
+    .def-feature {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px 24px;
+      border-top: 3px solid rgba(211,47,47,0.5);
+      transition: all 0.3s;
+    }
+    .def-feature:hover { background: rgba(211,47,47,0.06); border-color: rgba(211,47,47,0.3); transform: translateY(-3px); }
+    .def-feature-icon { font-size: 28px; margin-bottom: 14px; }
+    .def-feature h4 {
+      font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700;
+      color: var(--white); margin-bottom: 8px;
+    }
+    .def-feature p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ─── INTUNE SECTION ─── */
+    .intune-bg { background: rgba(13,31,60,0.6); }
+    .intune-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 56px; }
+    .intune-visual {
+      background: rgba(0,150,136,0.05); border: 1px solid rgba(0,150,136,0.2);
+      border-radius: 20px; padding: 36px; position: relative; overflow: hidden;
+    }
+    .intune-visual::before {
+      content: '📱'; position: absolute; right: -10px; top: -10px;
+      font-size: 120px; opacity: 0.06;
+    }
+    .intune-device-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .intune-device {
+      background: rgba(0,150,136,0.1); border: 1px solid rgba(0,150,136,0.25);
+      border-radius: 12px; padding: 18px 16px;
+      display: flex; align-items: center; gap: 12px;
+      transition: all 0.3s;
+    }
+    .intune-device:hover { background: rgba(0,150,136,0.18); transform: translateX(4px); }
+    .intune-device-icon { font-size: 24px; }
+    .intune-device-info {}
+    .intune-device-name {
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+      color: #80CBC4;
+    }
+    .intune-device-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .intune-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .intune-feature {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px 24px;
+      border-top: 3px solid rgba(0,150,136,0.5);
+      transition: all 0.3s;
+    }
+    .intune-feature:hover { background: rgba(0,150,136,0.06); border-color: rgba(0,150,136,0.3); transform: translateY(-3px); }
+    .intune-feature-icon { font-size: 28px; margin-bottom: 14px; }
+    .intune-feature h4 {
+      font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700;
+      color: var(--white); margin-bottom: 8px;
+    }
+    .intune-feature p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .intune-tag {
+      background: rgba(0,150,136,0.15); color: #80CBC4;
+      padding: 4px 12px; border-radius: 100px; font-size: 12px;
+      font-family: 'Montserrat', sans-serif; font-weight: 600;
+      display: inline-block; margin-top: 12px;
+    }
+
+    /* ─── SOLUTION STRIP ─── */
+    .solution-strip {
+      background: linear-gradient(135deg, rgba(21,101,192,0.12), rgba(211,47,47,0.08), rgba(0,150,136,0.08));
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 48px 60px;
+    }
+    .solution-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+    .solution-inner h3 {
+      font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 900;
+      color: var(--white); margin-bottom: 12px;
+    }
+    .solution-inner p { color: var(--text-muted); font-size: 16px; margin-bottom: 32px; }
+    .solution-logos { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .sol-logo {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 24px;
+      font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700;
+      color: var(--text); display: flex; align-items: center; gap: 10px;
+      transition: all 0.25s;
+    }
+    .sol-logo:hover { transform: translateY(-2px); }
+    .sol-logo.purview { border-color: rgba(21,101,192,0.4); color: var(--blue-light); background: rgba(21,101,192,0.08); }
+    .sol-logo.defender { border-color: rgba(211,47,47,0.4); color: #EF9A9A; background: rgba(211,47,47,0.08); }
+    .sol-logo.intune { border-color: rgba(0,150,136,0.4); color: #80CBC4; background: rgba(0,150,136,0.08); }
+
     @media (max-width: 900px) {
+      .defender-hero { grid-template-columns: 1fr; }
+      .defender-product-grid { grid-template-columns: repeat(2, 1fr); }
+      .defender-features { grid-template-columns: 1fr; }
+      .intune-layout { grid-template-columns: 1fr; }
+      .intune-features { grid-template-columns: 1fr; }
+      .solution-strip { padding: 40px 24px; }
+      .solution-logos { gap: 12px; }
       nav { padding: 16px 24px; }
       .nav-links { display: none; }
       section { padding: 72px 24px; }
@@ -444,8 +572,9 @@
   </div>
   <ul class="nav-links">
     <li><a href="#why">Microsoft Purview</a></li>
+    <li><a href="#defender">Defender</a></li>
+    <li><a href="#intune">Intune</a></li>
     <li><a href="#services">บริการ</a></li>
-    <li><a href="#process">ขั้นตอน</a></li>
     <li><a href="#contact">ติดต่อ</a></li>
   </ul>
   <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">ปรึกษาฟรี</button>
@@ -475,7 +604,7 @@
     </div>
     <div class="hero-stats">
       <div class="stat-item">
-        <div class="stat-num">20<span>+</span></div>
+        <div class="stat-num">30<span>+</span></div>
         <div class="stat-label">โปรเจกต์สำเร็จ</div>
       </div>
       <div class="stat-item">
@@ -552,12 +681,16 @@
     <div class="expertise-pills">
       <div class="pill">Microsoft Certified</div>
       <div class="pill">Purview Implementation</div>
+      <div class="pill">Defender XDR</div>
+      <div class="pill">Intune MDM/MAM</div>
       <div class="pill">PDPA Consulting</div>
       <div class="pill">Azure Integration</div>
       <div class="pill">M365 Security</div>
       <div class="pill">Zero Trust Architecture</div>
       <div class="pill">Data Classification</div>
       <div class="pill">Compliance Framework</div>
+      <div class="pill">Endpoint Security</div>
+      <div class="pill">Cloud Security</div>
     </div>
   </div>
 </div>
@@ -621,6 +754,218 @@
   </div>
 </section>
 
+<!-- MICROSOFT DEFENDER -->
+<section id="defender" class="defender-bg">
+  <div class="container">
+    <div class="section-label">Microsoft Defender</div>
+    <h2 class="section-title">ป้องกันภัยคุกคามองค์กร<br/>แบบครบวงจรด้วย Defender</h2>
+    <p class="section-sub">KTech เชี่ยวชาญการติดตั้งและบริหาร Microsoft Defender ทุก Workload ปกป้องทุก Endpoint, Identity, Cloud และ Network ในระบบเดียว</p>
+
+    <div class="defender-hero">
+      <div>
+        <div class="defender-badge-row">
+          <span class="def-badge">XDR Platform</span>
+          <span class="def-badge">Zero Trust</span>
+          <span class="def-badge">AI-Powered</span>
+        </div>
+        <h3 style="font-family:'Montserrat',sans-serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:14px;">Microsoft Defender XDR Suite</h3>
+        <p style="color:var(--text-muted);font-size:15px;line-height:1.7;margin-bottom:24px;">แพลตฟอร์ม Extended Detection & Response (XDR) ที่รวมการป้องกันภัยคุกคามจากทุกมิติไว้ในที่เดียว ด้วย AI ที่วิเคราะห์และตอบสนองต่อภัยคุกคามได้แบบ Real-time</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+          <li style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:14px;"><span style="color:#EF9A9A;font-size:18px;">✓</span> ตรวจจับภัยคุกคามอัตโนมัติด้วย AI</li>
+          <li style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:14px;"><span style="color:#EF9A9A;font-size:18px;">✓</span> Unified Security Operations Center</li>
+          <li style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:14px;"><span style="color:#EF9A9A;font-size:18px;">✓</span> Integration กับ Microsoft Sentinel & Purview</li>
+          <li style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:14px;"><span style="color:#EF9A9A;font-size:18px;">✓</span> Automated Incident Response</li>
+        </ul>
+      </div>
+      <div class="defender-visual">
+        <p style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:#EF9A9A;letter-spacing:0.1em;margin-bottom:20px;">DEFENDER PRODUCT SUITE</p>
+        <div class="defender-product-grid">
+          <div class="def-product">
+            <div class="def-product-icon">💻</div>
+            <div class="def-product-name">Defender for Endpoint</div>
+          </div>
+          <div class="def-product">
+            <div class="def-product-icon">👤</div>
+            <div class="def-product-name">Defender for Identity</div>
+          </div>
+          <div class="def-product">
+            <div class="def-product-icon">☁️</div>
+            <div class="def-product-name">Defender for Cloud</div>
+          </div>
+          <div class="def-product">
+            <div class="def-product-icon">📧</div>
+            <div class="def-product-name">Defender for Office 365</div>
+          </div>
+          <div class="def-product">
+            <div class="def-product-icon">🔗</div>
+            <div class="def-product-name">Defender for Cloud Apps</div>
+          </div>
+          <div class="def-product">
+            <div class="def-product-icon">🌐</div>
+            <div class="def-product-name">Defender for IoT</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="defender-features">
+      <div class="def-feature">
+        <div class="def-feature-icon">🔴</div>
+        <h4>Threat Detection & Response</h4>
+        <p>ตรวจจับและตอบสนองต่อภัยคุกคามแบบ Real-time ด้วย AI Engine ที่วิเคราะห์กว่า 65 ล้าน Signals ต่อวัน</p>
+      </div>
+      <div class="def-feature">
+        <div class="def-feature-icon">🏹</div>
+        <h4>Threat Hunting</h4>
+        <p>ค้นหาภัยคุกคามที่ซ่อนอยู่ในระบบเชิงรุก ด้วยเครื่องมือ Advanced Hunting และ KQL Query</p>
+      </div>
+      <div class="def-feature">
+        <div class="def-feature-icon">⚡</div>
+        <h4>Automated Remediation</h4>
+        <p>ตอบสนองและแก้ไขภัยคุกคามอัตโนมัติ ลด Mean Time to Respond (MTTR) ได้กว่า 90%</p>
+      </div>
+      <div class="def-feature">
+        <div class="def-feature-icon">🌩️</div>
+        <h4>Cloud Security Posture</h4>
+        <p>ประเมินและปรับปรุงความปลอดภัยของ Cloud Workload ทั้ง Azure, AWS และ GCP</p>
+      </div>
+      <div class="def-feature">
+        <div class="def-feature-icon">📊</div>
+        <h4>Vulnerability Management</h4>
+        <p>สแกนและจัดลำดับความสำคัญของช่องโหว่ในระบบ พร้อมแนะนำการแก้ไขอย่างเป็นระบบ</p>
+      </div>
+      <div class="def-feature">
+        <div class="def-feature-icon">🔗</div>
+        <h4>SIEM & SOAR Integration</h4>
+        <p>เชื่อมต่อกับ Microsoft Sentinel ได้ทันที สร้าง Security Operations Center ระดับองค์กร</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MICROSOFT INTUNE -->
+<section id="intune" class="intune-bg">
+  <div class="container">
+    <div class="section-label">Microsoft Intune</div>
+    <h2 class="section-title">บริหารจัดการทุกอุปกรณ์<br/>ด้วย Microsoft Intune</h2>
+    <p class="section-sub">จัดการ Device, Application และ Policy สำหรับพนักงานทุกคนจากทุกที่ รองรับ BYOD และ Corporate Device อย่างปลอดภัยด้วยมาตรฐาน Zero Trust</p>
+
+    <div class="intune-layout">
+      <div class="intune-visual">
+        <p style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:#80CBC4;letter-spacing:0.1em;margin-bottom:20px;">SUPPORTED PLATFORMS</p>
+        <div class="intune-device-grid">
+          <div class="intune-device">
+            <div class="intune-device-icon">🪟</div>
+            <div class="intune-device-info">
+              <div class="intune-device-name">Windows</div>
+              <div class="intune-device-sub">Windows 10/11 Pro & Enterprise</div>
+            </div>
+          </div>
+          <div class="intune-device">
+            <div class="intune-device-icon">🍎</div>
+            <div class="intune-device-info">
+              <div class="intune-device-name">macOS</div>
+              <div class="intune-device-sub">Mac, MacBook ทุกรุ่น</div>
+            </div>
+          </div>
+          <div class="intune-device">
+            <div class="intune-device-icon">📱</div>
+            <div class="intune-device-info">
+              <div class="intune-device-name">iOS / iPadOS</div>
+              <div class="intune-device-sub">iPhone, iPad ทุกรุ่น</div>
+            </div>
+          </div>
+          <div class="intune-device">
+            <div class="intune-device-icon">🤖</div>
+            <div class="intune-device-info">
+              <div class="intune-device-name">Android</div>
+              <div class="intune-device-sub">Android Enterprise & BYOD</div>
+            </div>
+          </div>
+          <div class="intune-device">
+            <div class="intune-device-icon">🐧</div>
+            <div class="intune-device-info">
+              <div class="intune-device-name">Linux</div>
+              <div class="intune-device-sub">Ubuntu, Red Hat และอื่นๆ</div>
+            </div>
+          </div>
+          <div class="intune-device">
+            <div class="intune-device-icon">🌐</div>
+            <div class="intune-device-info">
+              <div class="intune-device-name">Web / VDI</div>
+              <div class="intune-device-sub">Azure Virtual Desktop</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
+          <span class="intune-tag">MDM & MAM</span>
+          <span class="intune-tag">Zero Trust</span>
+          <span class="intune-tag">BYOD Ready</span>
+          <span class="intune-tag">Co-management</span>
+        </div>
+        <h3 style="font-family:'Montserrat',sans-serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:14px;">Unified Endpoint Management</h3>
+        <p style="color:var(--text-muted);font-size:15px;line-height:1.7;margin-bottom:24px;">บริหารอุปกรณ์ทุกชนิดจากคอนโซลเดียว ไม่ว่าจะเป็น Laptop, Smartphone หรือ Tablet ควบคุม Policy, App และความปลอดภัยได้จากระยะไกล รองรับ Hybrid Work อย่างสมบูรณ์</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+          <li style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:14px;"><span style="color:#80CBC4;font-size:18px;">✓</span> Mobile Device Management (MDM)</li>
+          <li style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:14px;"><span style="color:#80CBC4;font-size:18px;">✓</span> Mobile Application Management (MAM)</li>
+          <li style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:14px;"><span style="color:#80CBC4;font-size:18px;">✓</span> Conditional Access & Compliance Policy</li>
+          <li style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:14px;"><span style="color:#80CBC4;font-size:18px;">✓</span> App Protection บน Personal Devices (BYOD)</li>
+          <li style="display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:14px;"><span style="color:#80CBC4;font-size:18px;">✓</span> Integration กับ Defender & Purview</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="intune-features">
+      <div class="intune-feature">
+        <div class="intune-feature-icon">⚙️</div>
+        <h4>Device Configuration</h4>
+        <p>กำหนดค่าอุปกรณ์ทุกชนิดจากส่วนกลาง ครอบคลุม Security Policy, Wi-Fi, VPN และ Certificate</p>
+      </div>
+      <div class="intune-feature">
+        <div class="intune-feature-icon">📦</div>
+        <h4>App Management</h4>
+        <p>Deploy, Update และถอนการติดตั้ง Application บนอุปกรณ์พนักงานได้อัตโนมัติ ควบคุม App ทั้ง Corporate และ Personal</p>
+      </div>
+      <div class="intune-feature">
+        <div class="intune-feature-icon">🔐</div>
+        <h4>Conditional Access</h4>
+        <p>กำหนดเงื่อนไขการเข้าถึงทรัพยากรองค์กร ตรวจสอบ Device Compliance ก่อนอนุญาตทุกครั้ง</p>
+      </div>
+      <div class="intune-feature">
+        <div class="intune-feature-icon">🔄</div>
+        <h4>Autopilot & Auto-enrollment</h4>
+        <p>ลงทะเบียนอุปกรณ์ใหม่อัตโนมัติด้วย Windows Autopilot ลดเวลา IT Setup จากชั่วโมงเหลือนาที</p>
+      </div>
+      <div class="intune-feature">
+        <div class="intune-feature-icon">🗑️</div>
+        <h4>Remote Wipe & Lock</h4>
+        <p>ล้างข้อมูลหรือล็อกอุปกรณ์ที่สูญหายหรือถูกขโมยได้ทันที ปกป้องข้อมูลองค์กรจากระยะไกล</p>
+      </div>
+      <div class="intune-feature">
+        <div class="intune-feature-icon">📈</div>
+        <h4>Compliance Reporting</h4>
+        <p>รายงานสถานะ Compliance ของอุปกรณ์ทุกเครื่อง พร้อม Dashboard และ Alert แบบ Real-time</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MICROSOFT SOLUTION STRIP -->
+<div class="solution-strip">
+  <div class="solution-inner">
+    <h3>Microsoft Security Suite ครบวงจรจาก KTech</h3>
+    <p>เราเป็นผู้เชี่ยวชาญที่ครอบคลุมทั้ง 3 แพลตฟอร์มหลักของ Microsoft Security</p>
+    <div class="solution-logos">
+      <div class="sol-logo purview">🔒 Microsoft Purview</div>
+      <div class="sol-logo defender">🛡️ Microsoft Defender</div>
+      <div class="sol-logo intune">📱 Microsoft Intune</div>
+    </div>
+  </div>
+</div>
+
 <!-- PROCESS -->
 <section id="process">
   <div class="container">
@@ -665,7 +1010,7 @@
         <div class="contact-items">
           <div class="contact-item">
             <div class="icon">📧</div>
-            <span>info@ktechitservice.com</span>
+            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ce5e2eae3cce7f8e9efe4a2efe3a2f8e4">[email&#160;protected]</a></span>
           </div>
           <div class="contact-item">
             <div class="icon">📞</div>
@@ -709,8 +1054,13 @@
             <select id="service">
               <option value="">-- เลือกบริการ --</option>
               <option>Purview Assessment & Design</option>
-              <option>Implementation & Deployment</option>
+              <option>Purview Implementation & Deployment</option>
               <option>PDPA & Compliance Consulting</option>
+              <option>Microsoft Defender XDR Implementation</option>
+              <option>Microsoft Defender for Endpoint</option>
+              <option>Microsoft Defender for Cloud</option>
+              <option>Microsoft Intune – Device Management</option>
+              <option>Microsoft Intune – App Management (MAM)</option>
               <option>Training & Managed Service</option>
               <option>อื่นๆ / ปรึกษาทั่วไป</option>
             </select>
@@ -741,7 +1091,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   function submitForm() {
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
@@ -764,8 +1114,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.why-card, .service-card, .step').forEach(el => {
-    el.style.opacity = '0';
+  document.querySelectorAll('.why-card, .service-card, .step, .def-feature, .def-product, .intune-feature, .intune-device').forEach(el => {    el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);

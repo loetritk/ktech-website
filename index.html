@@ -534,8 +534,171 @@
     .sol-logo.defender { border-color: rgba(211,47,47,0.4); color: #EF9A9A; background: rgba(211,47,47,0.08); }
     .sol-logo.intune { border-color: rgba(0,150,136,0.4); color: #80CBC4; background: rgba(0,150,136,0.08); }
 
+    /* ─── MIM SECTION ─── */
+    --mim: #6A1B9A;
+    --mim-mid: #7B1FA2;
+    --mim-light: #CE93D8;
+    --mim-glow: rgba(106,27,154,0.18);
+
+    /* ─── MIM SECTION ─── */
+    .mim-bg { background: rgba(20,8,36,0.65); }
+    .mim-header-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; margin-bottom: 64px;
+    }
+
+    /* sync diagram */
+    .mim-sync-diagram {
+      background: rgba(106,27,154,0.07); border: 1px solid rgba(106,27,154,0.2);
+      border-radius: 20px; padding: 36px; position: relative; overflow: hidden;
+    }
+    .mim-sync-diagram::before {
+      content: '🔄'; position: absolute; right: -10px; top: -10px;
+      font-size: 120px; opacity: 0.05; pointer-events: none;
+    }
+    .sync-label {
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: #CE93D8;
+      margin-bottom: 22px;
+    }
+    .sync-flow { display: flex; align-items: center; gap: 10px; }
+    .sync-col { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .sync-arrow-col {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 6px; flex-shrink: 0;
+    }
+    .sync-arrow-line {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .sync-arrow-label {
+      font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700;
+      color: #CE93D8; letter-spacing: 0.08em; text-align: center; white-space: nowrap;
+    }
+    .arrow-shaft {
+      width: 40px; height: 2px;
+      background: linear-gradient(90deg, rgba(106,27,154,0.4), #CE93D8, rgba(106,27,154,0.4));
+      position: relative;
+    }
+    .arrow-shaft::after {
+      content: '▶'; position: absolute; right: -8px; top: -7px;
+      font-size: 10px; color: #CE93D8;
+    }
+    .sync-node {
+      background: rgba(106,27,154,0.12); border: 1px solid rgba(106,27,154,0.3);
+      border-radius: 10px; padding: 10px 14px;
+      display: flex; align-items: center; gap: 10px;
+      transition: all 0.3s;
+    }
+    .sync-node:hover { background: rgba(106,27,154,0.22); border-color: rgba(206,147,216,0.5); }
+    .sync-node-icon { font-size: 20px; flex-shrink: 0; }
+    .sync-node-text {}
+    .sync-node-name {
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
+      color: #CE93D8; line-height: 1.2;
+    }
+    .sync-node-sub { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
+    .sync-center {
+      background: linear-gradient(135deg, rgba(106,27,154,0.3), rgba(106,27,154,0.15));
+      border: 2px solid rgba(206,147,216,0.5);
+      border-radius: 14px; padding: 18px 14px; text-align: center;
+      box-shadow: 0 0 24px rgba(106,27,154,0.3);
+      flex-shrink: 0; min-width: 90px;
+    }
+    .sync-center-icon { font-size: 28px; margin-bottom: 6px; }
+    .sync-center-name {
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      color: #CE93D8; line-height: 1.3;
+    }
+    .sync-center-badge {
+      background: rgba(206,147,216,0.2); color: #CE93D8;
+      border-radius: 100px; font-size: 9px; font-weight: 700;
+      font-family: 'Montserrat', sans-serif; padding: 3px 8px; margin-top: 6px;
+      display: inline-block;
+    }
+
+    /* mim badge row */
+    .mim-badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .mim-badge {
+      background: rgba(106,27,154,0.15); border: 1px solid rgba(106,27,154,0.45);
+      color: #CE93D8; padding: 5px 14px; border-radius: 100px;
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.07em;
+    }
+
+    /* mim features */
+    .mim-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 48px; }
+    .mim-feature {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px 24px;
+      border-top: 3px solid rgba(106,27,154,0.55);
+      transition: all 0.3s;
+    }
+    .mim-feature:hover { background: rgba(106,27,154,0.07); border-color: rgba(106,27,154,0.35); transform: translateY(-3px); }
+    .mim-feature-icon { font-size: 28px; margin-bottom: 14px; }
+    .mim-feature h4 {
+      font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700;
+      color: var(--white); margin-bottom: 8px;
+    }
+    .mim-feature p { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+
+    /* connector grid */
+    .mim-connector-section { margin-top: 0; }
+    .mim-connector-title {
+      font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700;
+      color: var(--white); margin-bottom: 8px;
+    }
+    .mim-connector-sub { color: var(--text-muted); font-size: 15px; margin-bottom: 28px; line-height: 1.6; }
+    .connector-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .connector-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 18px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      gap: 10px; transition: all 0.3s; cursor: default;
+    }
+    .connector-card:hover { border-color: rgba(106,27,154,0.4); background: rgba(106,27,154,0.08); transform: translateY(-3px); }
+    .connector-icon { font-size: 32px; }
+    .connector-name {
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+      color: var(--white); line-height: 1.3;
+    }
+    .connector-type {
+      font-size: 11px; color: var(--text-muted);
+      background: rgba(255,255,255,0.05); border-radius: 6px;
+      padding: 3px 10px;
+    }
+    .connector-card.source .connector-name { color: #CE93D8; }
+    .connector-card.target .connector-name { color: var(--blue-light); }
+
+    .connector-section-label {
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .connector-section-label.src { color: #CE93D8; }
+    .connector-section-label.dst { color: var(--blue-light); }
+    .connector-divider {
+      display: flex; align-items: center; gap: 14px; margin: 28px 0;
+    }
+    .connector-divider-line { flex: 1; height: 1px; background: var(--border); }
+    .connector-divider-badge {
+      background: linear-gradient(135deg, rgba(106,27,154,0.3), rgba(21,101,192,0.2));
+      border: 1px solid rgba(206,147,216,0.3);
+      border-radius: 100px; padding: 6px 18px;
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
+      color: #CE93D8; white-space: nowrap;
+    }
+
+    /* mim tag */
+    .mim-tag {
+      display: inline-block; background: rgba(106,27,154,0.15); color: #CE93D8;
+      padding: 4px 12px; border-radius: 100px; font-size: 12px;
+      font-family: 'Montserrat', sans-serif; font-weight: 600; margin-top: 12px;
+    }
+
     @media (max-width: 900px) {
-      .defender-hero { grid-template-columns: 1fr; }
+      .mim-header-layout { grid-template-columns: 1fr; }
+      .mim-features { grid-template-columns: 1fr; }
+      .connector-grid { grid-template-columns: repeat(2, 1fr); }
+    }
       .defender-product-grid { grid-template-columns: repeat(2, 1fr); }
       .defender-features { grid-template-columns: 1fr; }
       .intune-layout { grid-template-columns: 1fr; }
@@ -574,6 +737,7 @@
     <li><a href="#why">Microsoft Purview</a></li>
     <li><a href="#defender">Defender</a></li>
     <li><a href="#intune">Intune</a></li>
+    <li><a href="#mim">Identity Manager</a></li>
     <li><a href="#services">บริการ</a></li>
     <li><a href="#contact">ติดต่อ</a></li>
   </ul>
@@ -590,6 +754,7 @@
     <h1>
       ผู้เชี่ยวชาญ<br/>
       <span class="accent-blue">Microsoft Purview</span><br/>
+      อันดับ <span class="accent">1</span> ในไทย
     </h1>
     <p class="hero-sub">
       KTech IT and Service ให้บริการด้าน Microsoft Purview อย่างครบวงจร — ตั้งแต่การออกแบบ Data Governance, Information Protection ไปจนถึง Compliance Management สำหรับองค์กรทุกขนาด
@@ -604,15 +769,15 @@
     </div>
     <div class="hero-stats">
       <div class="stat-item">
-        <div class="stat-num">30<span>+</span></div>
+        <div class="stat-num">50<span>+</span></div>
         <div class="stat-label">โปรเจกต์สำเร็จ</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">20<span>+</span></div>
+        <div class="stat-num">50<span>+</span></div>
         <div class="stat-label">องค์กรที่ไว้วางใจ</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">15<span>+</span></div>
+        <div class="stat-num">20<span>+</span></div>
         <div class="stat-label">ปีประสบการณ์</div>
       </div>
     </div>
@@ -683,6 +848,8 @@
       <div class="pill">Purview Implementation</div>
       <div class="pill">Defender XDR</div>
       <div class="pill">Intune MDM/MAM</div>
+      <div class="pill">Identity Manager (MIM)</div>
+      <div class="pill">HR-Driven Provisioning</div>
       <div class="pill">PDPA Consulting</div>
       <div class="pill">Azure Integration</div>
       <div class="pill">M365 Security</div>
@@ -953,15 +1120,294 @@
   </div>
 </section>
 
+<!-- MICROSOFT IDENTITY MANAGER -->
+<section id="mim" class="mim-bg">
+  <div class="container">
+    <div class="section-label">Microsoft Identity Manager</div>
+    <h2 class="section-title">Identity & Account Management<br/>ครบวงจรด้วย MIM</h2>
+    <p class="section-sub">KTech ออกแบบและติดตั้ง Microsoft Identity Manager (MIM) สำหรับการ Synchronize ข้อมูล Identity จากระบบ HR, HRMS หรือ Database ใดๆ ไปยัง Active Directory, LDAP และระบบปลายทางอื่นๆ แบบอัตโนมัติและแม่นยำ</p>
+
+    <div class="mim-header-layout">
+      <!-- Left: Description -->
+      <div>
+        <div class="mim-badge-row">
+          <span class="mim-badge">Identity Sync</span>
+          <span class="mim-badge">HR-Driven Provisioning</span>
+          <span class="mim-badge">Lifecycle Management</span>
+          <span class="mim-badge">Self-Service Portal</span>
+        </div>
+        <h3 style="font-family:'Montserrat',sans-serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:14px;">Authoritative Source → Target System</h3>
+        <p style="color:var(--text-muted);font-size:15px;line-height:1.75;margin-bottom:24px;">
+          MIM ทำหน้าที่เป็น Identity Hub กลาง รับข้อมูลพนักงานจาก HRMS หรือ Database ต้นทาง แล้ว Sync สร้าง/แก้ไข/ปิด Account ใน Active Directory, Azure AD, LDAP และระบบต่างๆ โดยอัตโนมัติ ตาม Business Rules ขององค์กร
+        </p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li style="display:flex;align-items:flex-start;gap:10px;color:var(--text-muted);font-size:14px;line-height:1.5;">
+            <span style="color:#CE93D8;font-size:17px;margin-top:1px;">✓</span>
+            สร้าง AD Account อัตโนมัติเมื่อพนักงานใหม่เข้างาน (Joiner)
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:var(--text-muted);font-size:14px;line-height:1.5;">
+            <span style="color:#CE93D8;font-size:17px;margin-top:1px;">✓</span>
+            อัปเดตข้อมูลทันทีเมื่อพนักงานย้ายแผนกหรือเปลี่ยนตำแหน่ง (Mover)
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:var(--text-muted);font-size:14px;line-height:1.5;">
+            <span style="color:#CE93D8;font-size:17px;margin-top:1px;">✓</span>
+            ปิด/ระงับ Account และเพิกถอนสิทธิ์ทันทีเมื่อพนักงานออก (Leaver)
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:var(--text-muted);font-size:14px;line-height:1.5;">
+            <span style="color:#CE93D8;font-size:17px;margin-top:1px;">✓</span>
+            Password Self-Service Portal และ Group Management สำหรับผู้ใช้งาน
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:var(--text-muted);font-size:14px;line-height:1.5;">
+            <span style="color:#CE93D8;font-size:17px;margin-top:1px;">✓</span>
+            กำหนด Business Rules, Attribute Mapping และ Workflow ได้ยืดหยุ่น
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right: Sync Flow Diagram -->
+      <div class="mim-sync-diagram">
+        <div class="sync-label">🔄 Identity Synchronization Flow</div>
+        <div class="sync-flow">
+
+          <!-- Sources -->
+          <div class="sync-col">
+            <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:#CE93D8;letter-spacing:0.1em;margin-bottom:4px;">SOURCE</div>
+            <div class="sync-node">
+              <div class="sync-node-icon">🏢</div>
+              <div class="sync-node-text">
+                <div class="sync-node-name">HRMS</div>
+                <div class="sync-node-sub">SAP HCM, Oracle HCM</div>
+              </div>
+            </div>
+            <div class="sync-node">
+              <div class="sync-node-icon">👥</div>
+              <div class="sync-node-text">
+                <div class="sync-node-name">HR System</div>
+                <div class="sync-node-sub">Workday, BambooHR</div>
+              </div>
+            </div>
+            <div class="sync-node">
+              <div class="sync-node-icon">🗄️</div>
+              <div class="sync-node-text">
+                <div class="sync-node-name">Database</div>
+                <div class="sync-node-sub">SQL Server, Oracle DB</div>
+              </div>
+            </div>
+            <div class="sync-node">
+              <div class="sync-node-icon">📂</div>
+              <div class="sync-node-text">
+                <div class="sync-node-name">CSV / File</div>
+                <div class="sync-node-sub">Flat File, Excel Import</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arrow in -->
+          <div class="sync-arrow-col">
+            <div class="sync-arrow-line">
+              <div class="arrow-shaft"></div>
+              <div class="sync-arrow-label">IMPORT</div>
+            </div>
+          </div>
+
+          <!-- MIM Center -->
+          <div class="sync-center">
+            <div class="sync-center-icon">⚙️</div>
+            <div class="sync-center-name">Microsoft<br/>Identity<br/>Manager</div>
+            <div class="sync-center-badge">MIM 2016</div>
+          </div>
+
+          <!-- Arrow out -->
+          <div class="sync-arrow-col">
+            <div class="sync-arrow-line">
+              <div class="arrow-shaft"></div>
+              <div class="sync-arrow-label">EXPORT</div>
+            </div>
+          </div>
+
+          <!-- Targets -->
+          <div class="sync-col">
+            <div style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:var(--blue-light);letter-spacing:0.1em;margin-bottom:4px;">TARGET</div>
+            <div class="sync-node" style="border-color:rgba(21,101,192,0.3);">
+              <div class="sync-node-icon">🏛️</div>
+              <div class="sync-node-text">
+                <div class="sync-node-name" style="color:var(--blue-light);">Active Directory</div>
+                <div class="sync-node-sub">On-premise AD DS</div>
+              </div>
+            </div>
+            <div class="sync-node" style="border-color:rgba(21,101,192,0.3);">
+              <div class="sync-node-icon">☁️</div>
+              <div class="sync-node-text">
+                <div class="sync-node-name" style="color:var(--blue-light);">Azure AD / Entra ID</div>
+                <div class="sync-node-sub">Cloud Identity</div>
+              </div>
+            </div>
+            <div class="sync-node" style="border-color:rgba(21,101,192,0.3);">
+              <div class="sync-node-icon">📁</div>
+              <div class="sync-node-text">
+                <div class="sync-node-name" style="color:var(--blue-light);">LDAP</div>
+                <div class="sync-node-sub">OpenLDAP, AD LDS</div>
+              </div>
+            </div>
+            <div class="sync-node" style="border-color:rgba(21,101,192,0.3);">
+              <div class="sync-node-icon">🔌</div>
+              <div class="sync-node-text">
+                <div class="sync-node-name" style="color:var(--blue-light);">Other Systems</div>
+                <div class="sync-node-sub">Exchange, ServiceNow</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- MIM Feature Cards -->
+    <div class="mim-features">
+      <div class="mim-feature">
+        <div class="mim-feature-icon">🔄</div>
+        <h4>Identity Synchronization</h4>
+        <p>Sync ข้อมูล Identity แบบ Real-time หรือตาม Schedule จากแหล่งข้อมูลต้นทางหลายแหล่งพร้อมกันสู่ระบบปลายทาง</p>
+      </div>
+      <div class="mim-feature">
+        <div class="mim-feature-icon">🧩</div>
+        <h4>Attribute Mapping & Transform</h4>
+        <p>กำหนด Rule การ Map และแปลงข้อมูล Attribute ระหว่างระบบ เช่น สร้าง Username, Email Format ตาม Policy ขององค์กร</p>
+      </div>
+      <div class="mim-feature">
+        <div class="mim-feature-icon">⚡</div>
+        <h4>Automated Provisioning</h4>
+        <p>สร้าง แก้ไข และปิด Account โดยอัตโนมัติตามสถานะพนักงานใน HR ครอบคลุม Joiner, Mover และ Leaver Process</p>
+      </div>
+      <div class="mim-feature">
+        <div class="mim-feature-icon">🔑</div>
+        <h4>Password Management</h4>
+        <p>Self-Service Password Reset และ Password Synchronization ข้ามระบบ ลดภาระ Helpdesk ได้กว่า 60%</p>
+      </div>
+      <div class="mim-feature">
+        <div class="mim-feature-icon">👥</div>
+        <h4>Group & Role Management</h4>
+        <p>บริหารจัดการ Security Group, Distribution List และ Role ตาม Business Logic อัตโนมัติตามตำแหน่งและแผนกงาน</p>
+      </div>
+      <div class="mim-feature">
+        <div class="mim-feature-icon">🌐</div>
+        <h4>Self-Service Portal (SSPR)</h4>
+        <p>Portal สำหรับผู้ใช้งานจัดการ Account ตัวเอง รีเซ็ตรหัสผ่าน ขอสิทธิ์ และอัปเดตข้อมูลโดยไม่ต้องผ่าน IT</p>
+      </div>
+    </div>
+
+    <!-- Connector Grid -->
+    <div class="mim-connector-section">
+      <h3 class="mim-connector-title">Source & Target Connectors</h3>
+      <p class="mim-connector-sub">MIM รองรับ Management Agent (Connector) สำหรับเชื่อมต่อกับระบบที่หลากหลาย ทั้ง Built-in และ Custom ECMA Connector</p>
+
+      <div class="connector-section-label src">📥 Source Systems — ต้นทางข้อมูล Identity</div>
+      <div class="connector-grid">
+        <div class="connector-card source">
+          <div class="connector-icon">🏢</div>
+          <div class="connector-name">SAP HCM</div>
+          <div class="connector-type">HR Platform</div>
+        </div>
+        <div class="connector-card source">
+          <div class="connector-icon">☁️</div>
+          <div class="connector-name">Workday</div>
+          <div class="connector-type">Cloud HCM</div>
+        </div>
+        <div class="connector-card source">
+          <div class="connector-icon">🗄️</div>
+          <div class="connector-name">SQL Server / Oracle</div>
+          <div class="connector-type">Database</div>
+        </div>
+        <div class="connector-card source">
+          <div class="connector-icon">📊</div>
+          <div class="connector-name">Excel / CSV</div>
+          <div class="connector-type">Flat File</div>
+        </div>
+        <div class="connector-card source">
+          <div class="connector-icon">🔗</div>
+          <div class="connector-name">REST / SOAP API</div>
+          <div class="connector-type">Web Service</div>
+        </div>
+        <div class="connector-card source">
+          <div class="connector-icon">👤</div>
+          <div class="connector-name">BambooHR / Other HR</div>
+          <div class="connector-type">HR SaaS</div>
+        </div>
+        <div class="connector-card source">
+          <div class="connector-icon">🏛️</div>
+          <div class="connector-name">Oracle HCM</div>
+          <div class="connector-type">HR Platform</div>
+        </div>
+        <div class="connector-card source">
+          <div class="connector-icon">⚙️</div>
+          <div class="connector-name">Custom ECMA</div>
+          <div class="connector-type">Extensible Connector</div>
+        </div>
+      </div>
+
+      <div class="connector-divider">
+        <div class="connector-divider-line"></div>
+        <div class="connector-divider-badge">⚙️ MIM Sync Engine — Business Rules & Workflow</div>
+        <div class="connector-divider-line"></div>
+      </div>
+
+      <div class="connector-section-label dst">📤 Target Systems — ปลายทางที่รับข้อมูล</div>
+      <div class="connector-grid">
+        <div class="connector-card target">
+          <div class="connector-icon">🏛️</div>
+          <div class="connector-name">Active Directory</div>
+          <div class="connector-type">On-premise AD DS</div>
+        </div>
+        <div class="connector-card target">
+          <div class="connector-icon">☁️</div>
+          <div class="connector-name">Azure AD / Entra ID</div>
+          <div class="connector-type">Cloud Directory</div>
+        </div>
+        <div class="connector-card target">
+          <div class="connector-icon">📁</div>
+          <div class="connector-name">LDAP / OpenLDAP</div>
+          <div class="connector-type">Directory Service</div>
+        </div>
+        <div class="connector-card target">
+          <div class="connector-icon">📧</div>
+          <div class="connector-name">Exchange / M365</div>
+          <div class="connector-type">Mail & Collaboration</div>
+        </div>
+        <div class="connector-card target">
+          <div class="connector-icon">🎫</div>
+          <div class="connector-name">ServiceNow</div>
+          <div class="connector-type">ITSM Platform</div>
+        </div>
+        <div class="connector-card target">
+          <div class="connector-icon">🔐</div>
+          <div class="connector-name">PAM / CyberArk</div>
+          <div class="connector-type">Privileged Access</div>
+        </div>
+        <div class="connector-card target">
+          <div class="connector-icon">🗄️</div>
+          <div class="connector-name">SQL / Oracle DB</div>
+          <div class="connector-type">Target Database</div>
+        </div>
+        <div class="connector-card target">
+          <div class="connector-icon">🔌</div>
+          <div class="connector-name">Custom / ECMA2</div>
+          <div class="connector-type">Any System</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- MICROSOFT SOLUTION STRIP -->
 <div class="solution-strip">
   <div class="solution-inner">
-    <h3>Microsoft Security Suite ครบวงจรจาก KTech</h3>
-    <p>เราเป็นผู้เชี่ยวชาญที่ครอบคลุมทั้ง 3 แพลตฟอร์มหลักของ Microsoft Security</p>
+    <h3>Microsoft Security & Identity Suite ครบวงจรจาก KTech</h3>
+    <p>เราเป็นผู้เชี่ยวชาญที่ครอบคลุมทั้ง 4 แพลตฟอร์มหลักของ Microsoft Security & Identity</p>
     <div class="solution-logos">
       <div class="sol-logo purview">🔒 Microsoft Purview</div>
       <div class="sol-logo defender">🛡️ Microsoft Defender</div>
       <div class="sol-logo intune">📱 Microsoft Intune</div>
+      <div class="sol-logo" style="border-color:rgba(106,27,154,0.4);color:#CE93D8;background:rgba(106,27,154,0.08);">⚙️ Identity Manager</div>
     </div>
   </div>
 </div>
@@ -1010,11 +1456,11 @@
         <div class="contact-items">
           <div class="contact-item">
             <div class="icon">📧</div>
-            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ce5e2eae3cce7f8e9efe4a2efe3a2f8e4">[email&#160;protected]</a></span>
+            <span><a href="mailto:info@ktechitservice.com">info@ktechitservice.com</a></span>
           </div>
           <div class="contact-item">
             <div class="icon">📞</div>
-            <span>09-896-8208</span>
+            <span>02-XXX-XXXX</span>
           </div>
           <div class="contact-item">
             <div class="icon">📍</div>
@@ -1061,6 +1507,9 @@
               <option>Microsoft Defender for Cloud</option>
               <option>Microsoft Intune – Device Management</option>
               <option>Microsoft Intune – App Management (MAM)</option>
+              <option>MIM – Identity Synchronization (HR → AD)</option>
+              <option>MIM – Account Lifecycle Management</option>
+              <option>MIM – Password Self-Service Portal</option>
               <option>Training & Managed Service</option>
               <option>อื่นๆ / ปรึกษาทั่วไป</option>
             </select>
@@ -1114,7 +1563,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.why-card, .service-card, .step, .def-feature, .def-product, .intune-feature, .intune-device').forEach(el => {    el.style.opacity = '0';
+  document.querySelectorAll('.why-card, .service-card, .step, .def-feature, .def-product, .intune-feature, .intune-device, .mim-feature, .connector-card').forEach(el => {    el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog – KTech IT and Service</title>
+  <meta name="description" content="บทความและบทเรียนจาก KTech">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue: #1565C0;
+      --blue-mid: #1976D2;
+      --blue-light: #42A5F5;
+      --orange: #F57C00;
+      --orange-light: #FFB74D;
+      --dark: #0A1628;
+      --dark2: #0D1F3C;
+      --text: #E8EDF5;
+      --text-muted: #8BA3C7;
+      --white: #ffffff;
+      --card-bg: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ─── BACKGROUND ─── */
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(21,101,192,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(21,101,192,0.07) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridPan 40s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes gridPan { from { transform: translate(0,0); } to { transform: translate(60px,60px); } }
+    .bg-glow {
+      position: fixed; top: -200px; left: -200px;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(21,101,192,0.18) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+      animation: floatGlow 8s ease-in-out infinite alternate;
+    }
+    .bg-glow2 {
+      position: fixed; bottom: -150px; right: -150px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,124,0,0.12) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    @keyframes floatGlow { from { transform: translate(0,0); } to { transform: translate(60px,40px); } }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(10,22,40,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo img { height: 44px; cursor: pointer; }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--text-muted); text-decoration: none;
+      font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--white); }
+    .nav-back svg { width: 16px; height: 16px; }
+
+    /* ─── MAIN ─── */
+    main {
+      position: relative; z-index: 1;
+      padding: 120px 24px 80px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* ─── LOADING / ERROR STATES ─── */
+    .state-box {
+      text-align: center;
+      padding: 120px 24px;
+    }
+    .state-icon { font-size: 64px; margin-bottom: 20px; }
+    .state-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px; font-weight: 700;
+      color: var(--text); margin-bottom: 12px;
+    }
+    .state-msg { color: var(--text-muted); font-size: 16px; }
+    .spinner {
+      width: 44px; height: 44px;
+      border: 3px solid var(--border);
+      border-top-color: var(--blue-light);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── POST HEADER ─── */
+    .post-header { margin-bottom: 40px; animation: fadeUp 0.6s ease both; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+    .post-cat {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 14px; border-radius: 100px;
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .cat-purview  { background: rgba(21,101,192,0.2);  border: 1px solid rgba(21,101,192,0.5);  color: #42A5F5; }
+    .cat-defender { background: rgba(198,40,40,0.2);   border: 1px solid rgba(198,40,40,0.5);   color: #EF9A9A; }
+    .cat-intune   { background: rgba(0,121,107,0.2);   border: 1px solid rgba(0,121,107,0.5);   color: #80CBC4; }
+    .cat-mim      { background: rgba(74,20,140,0.2);   border: 1px solid rgba(74,20,140,0.5);   color: #CE93D8; }
+    .cat-general  { background: rgba(245,124,0,0.15);  border: 1px solid rgba(245,124,0,0.4);   color: #FFB74D; }
+
+    .post-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 900; line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .post-meta {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+      color: var(--text-muted); font-size: 14px;
+    }
+    .post-meta-item { display: flex; align-items: center; gap: 6px; }
+    .post-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
+      color: white;
+    }
+    .post-meta-sep { color: var(--border); }
+
+    .post-cover {
+      width: 100%; border-radius: 16px;
+      aspect-ratio: 16/9; object-fit: cover;
+      border: 1px solid var(--border);
+      margin-bottom: 40px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .post-cover-placeholder {
+      width: 100%; border-radius: 16px;
+      aspect-ratio: 16/9;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 80px;
+      margin-bottom: 40px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    /* ─── PORTABLE TEXT BODY ─── */
+    .post-body { animation: fadeUp 0.6s 0.15s ease both; }
+
+    .post-body p {
+      font-size: 17px; line-height: 1.85;
+      color: var(--text); margin-bottom: 20px;
+    }
+    .post-body h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(20px, 3vw, 26px); font-weight: 700;
+      color: var(--white); margin: 40px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .post-body h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(17px, 2.5vw, 22px); font-weight: 700;
+      color: var(--white); margin: 32px 0 12px;
+    }
+    .post-body h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px; font-weight: 600;
+      color: var(--text); margin: 28px 0 10px;
+    }
+    .post-body blockquote {
+      border-left: 3px solid var(--orange);
+      padding: 12px 20px;
+      margin: 24px 0;
+      background: rgba(245,124,0,0.06);
+      border-radius: 0 8px 8px 0;
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 16px; line-height: 1.7;
+    }
+    .post-body ul, .post-body ol {
+      padding-left: 24px; margin-bottom: 20px;
+    }
+    .post-body li {
+      font-size: 17px; line-height: 1.8;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .post-body ul li::marker { color: var(--blue-light); }
+    .post-body ol li::marker { color: var(--orange-light); font-weight: 600; }
+    .post-body strong { color: var(--white); font-weight: 700; }
+    .post-body em { color: var(--text-muted); font-style: italic; }
+    .post-body code {
+      background: rgba(66,165,245,0.12);
+      border: 1px solid rgba(66,165,245,0.2);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: var(--blue-light);
+    }
+    .post-body pre {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      overflow-x: auto;
+      margin-bottom: 24px;
+    }
+    .post-body pre code {
+      background: none; border: none; padding: 0;
+      font-size: 14px; line-height: 1.6;
+      color: var(--blue-light);
+    }
+    .post-body a {
+      color: var(--blue-light);
+      text-decoration: underline;
+      text-decoration-color: rgba(66,165,245,0.4);
+      transition: color 0.2s;
+    }
+    .post-body a:hover { color: var(--white); }
+    .post-body img {
+      max-width: 100%; border-radius: 10px;
+      border: 1px solid var(--border);
+      margin: 20px 0;
+    }
+    .post-body hr {
+      border: none; border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+
+    /* ─── FOOTER BAR ─── */
+    .post-footer {
+      margin-top: 60px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--card-bg); border: 1px solid var(--border);
+      color: var(--text); text-decoration: none;
+      padding: 12px 24px; border-radius: 8px;
+      font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.05em; transition: all 0.2s;
+    }
+    .back-btn:hover {
+      border-color: var(--blue-light); color: var(--blue-light);
+      background: rgba(66,165,245,0.08);
+    }
+    .share-label {
+      font-size: 13px; color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      main { padding: 100px 20px 60px; }
+      .post-body p, .post-body li { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <div class="bg-glow2"></div>
+
+  <nav>
+    <div class="nav-logo">
+      <img src="/logo.png" alt="KTech" onerror="this.style.display='none'" onclick="window.location.href='/'">
+    </div>
+    <a href="/#blog" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      บทความทั้งหมด
+    </a>
+  </nav>
+
+  <main id="app">
+    <div class="state-box">
+      <div class="spinner"></div>
+      <div class="state-msg">กำลังโหลดบทความ...</div>
+    </div>
+  </main>
+
+  <script>
+    // ── CONFIG (ต้องตรงกับ index.html) ──
+    const SANITY_PROJECT_ID = 't0alwlb8';
+    const SANITY_DATASET    = 'production';
+    const SANITY_API_VER    = '2024-01-01';
+
+    const CATEGORY_MAP = {
+      purview:  { label: 'Microsoft Purview', icon: '🔒', cls: 'cat-purview'  },
+      defender: { label: 'Defender',          icon: '🛡️', cls: 'cat-defender' },
+      intune:   { label: 'Intune',            icon: '📱', cls: 'cat-intune'   },
+      mim:      { label: 'Identity Manager',  icon: '⚙️', cls: 'cat-mim'     },
+      general:  { label: 'ทั่วไป',            icon: '📝', cls: 'cat-general'  },
+    };
+
+    // ── อ่าน slug จาก URL path  /blog/my-post → "my-post" ──
+    function getSlug() {
+      const parts = window.location.pathname.replace(/\/$/, '').split('/');
+      return parts[parts.length - 1] || '';
+    }
+
+    // ── Portable Text → HTML renderer ──
+    function renderMarks(text, marks, markDefs) {
+      if (!marks || marks.length === 0) return escapeHtml(text);
+      let result = escapeHtml(text);
+      const sortedMarks = [...marks].reverse();
+      for (const mark of sortedMarks) {
+        const def = markDefs && markDefs.find(d => d._key === mark);
+        if (def && def._type === 'link') {
+          const href = escapeAttr(def.href || '#');
+          const target = href.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : '';
+          result = `<a href="${href}"${target}>${result}</a>`;
+        } else {
+          switch (mark) {
+            case 'strong':    result = `<strong>${result}</strong>`; break;
+            case 'em':        result = `<em>${result}</em>`; break;
+            case 'code':      result = `<code>${result}</code>`; break;
+            case 'underline': result = `<u>${result}</u>`; break;
+            case 'strike-through': result = `<s>${result}</s>`; break;
+          }
+        }
+      }
+      return result;
+    }
+
+    function renderSpans(spans, markDefs) {
+      return (spans || []).map(span => {
+        if (span._type === 'span') {
+          return renderMarks(span.text || '', span.marks, markDefs);
+        }
+        return '';
+      }).join('');
+    }
+
+    function renderBlock(block, listAccum) {
+      if (block._type === 'image' && block.imageUrl) {
+        const alt = escapeAttr(block.alt || '');
+        return `<img src="${escapeAttr(block.imageUrl)}" alt="${alt}" loading="lazy">`;
+      }
+
+      if (block._type !== 'block') return '';
+
+      const inner = renderSpans(block.children, block.markDefs);
+
+      // List items — caller handles wrapping
+      if (block.listItem === 'bullet') {
+        return { type: 'ul', html: `<li>${inner}</li>` };
+      }
+      if (block.listItem === 'number') {
+        return { type: 'ol', html: `<li>${inner}</li>` };
+      }
+
+      switch (block.style) {
+        case 'h1': return `<h2>${inner}</h2>`;  // map h1 → h2 (page title is h1)
+        case 'h2': return `<h2>${inner}</h2>`;
+        case 'h3': return `<h3>${inner}</h3>`;
+        case 'h4': return `<h4>${inner}</h4>`;
+        case 'blockquote': return `<blockquote>${inner}</blockquote>`;
+        default:   return inner.trim() ? `<p>${inner}</p>` : '';
+      }
+    }
+
+    function renderBody(blocks) {
+      if (!blocks || blocks.length === 0) return '<p>ยังไม่มีเนื้อหา</p>';
+      let html = '';
+      let listType = null;
+
+      for (const block of blocks) {
+        const result = renderBlock(block);
+        if (result && typeof result === 'object') {
+          // list item
+          if (listType !== result.type) {
+            if (listType) html += `</${listType}>`;
+            listType = result.type;
+            html += `<${listType}>`;
+          }
+          html += result.html;
+        } else {
+          if (listType) { html += `</${listType}>`; listType = null; }
+          html += result || '';
+        }
+      }
+      if (listType) html += `</${listType}>`;
+      return html;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    function escapeAttr(str) {
+      return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    // ── Fetch & Render ──
+    async function loadPost() {
+      const slug = getSlug();
+      if (!slug) { showError('ไม่พบบทความ', 'URL ไม่ถูกต้อง'); return; }
+
+      const query = encodeURIComponent(
+        `*[_type=="post" && slug.current=="${slug}"][0]{` +
+        `_id,title,excerpt,publishedAt,category,readTime,` +
+        `"author":author->name,"authorInitials":author->initials,` +
+        `"imageUrl":mainImage.asset->url,` +
+        `body[]{...,_type=="image"=>{...,"imageUrl":asset->url}}` +
+        `}`
+      );
+
+      try {
+        const res  = await fetch(
+          `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VER}/data/query/${SANITY_DATASET}?query=${query}`
+        );
+        const data = await res.json();
+        const post = data.result;
+        if (!post) { showError('ไม่พบบทความ', 'บทความนี้อาจถูกลบหรือ URL ไม่ถูกต้อง'); return; }
+        renderPost(post);
+      } catch (e) {
+        console.error(e);
+        showError('เกิดข้อผิดพลาด', 'ไม่สามารถโหลดบทความได้ กรุณาลองใหม่อีกครั้ง');
+      }
+    }
+
+    function renderPost(post) {
+      const cat = CATEGORY_MAP[post.category] || CATEGORY_MAP.general;
+      const initials = (post.authorInitials || (post.author ? post.author.slice(0,2) : 'KT')).toUpperCase();
+      const authorName = post.author || 'KTech Team';
+      const dateStr = post.publishedAt
+        ? new Date(post.publishedAt).toLocaleDateString('th-TH', { day:'numeric', month:'long', year:'numeric' })
+        : '';
+
+      // Update page title & meta description
+      document.title = `${escapeHtml(post.title)} – KTech IT and Service`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && post.excerpt) metaDesc.content = post.excerpt;
+
+      const coverHtml = post.imageUrl
+        ? `<img class="post-cover" src="${escapeAttr(post.imageUrl)}" alt="${escapeAttr(post.title)}" loading="eager">`
+        : `<div class="post-cover-placeholder">${cat.icon}</div>`;
+
+      const readTimeHtml = post.readTime
+        ? `<span class="post-meta-sep">·</span><span class="post-meta-item">⏱ ${escapeHtml(String(post.readTime))} นาที</span>`
+        : '';
+
+      document.getElementById('app').innerHTML = `
+        <div class="post-header">
+          <div class="post-cat ${cat.cls}">${cat.icon} ${cat.label}</div>
+          <h1 class="post-title">${escapeHtml(post.title)}</h1>
+          <div class="post-meta">
+            <span class="post-meta-item">
+              <div class="post-avatar">${escapeHtml(initials)}</div>
+              ${escapeHtml(authorName)}
+            </span>
+            ${dateStr ? `<span class="post-meta-sep">·</span><span class="post-meta-item">📅 ${escapeHtml(dateStr)}</span>` : ''}
+            ${readTimeHtml}
+          </div>
+        </div>
+
+        ${coverHtml}
+
+        <div class="post-body">
+          ${renderBody(post.body)}
+        </div>
+
+        <div class="post-footer">
+          <a href="/#blog" class="back-btn">
+            ← บทความทั้งหมด
+          </a>
+          <span class="share-label">KTech IT and Service</span>
+        </div>
+      `;
+    }
+
+    function showError(title, msg) {
+      document.getElementById('app').innerHTML = `
+        <div class="state-box">
+          <div class="state-icon">📭</div>
+          <div class="state-title">${escapeHtml(title)}</div>
+          <p class="state-msg">${escapeHtml(msg)}</p>
+          <br>
+          <a href="/#blog" class="back-btn" style="display:inline-flex;margin-top:16px;">← กลับหน้าบทความ</a>
+        </div>
+      `;
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>

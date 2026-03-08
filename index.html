@@ -2118,7 +2118,8 @@
     if (post) {
       const slug = post.slug || post._id;
       // เมื่อ Setup Sanity แล้ว เปลี่ยนเป็น: window.location.href = `/blog/${slug}`;
-      alert(`📖 "${post.title}"\n\nSetup Sanity CMS แล้ว uncomment บรรทัด redirect ใน openPost() ครับ`);
+      //alert(`📖 "${post.title}"\n\nSetup Sanity CMS แล้ว uncomment บรรทัด redirect ใน openPost() ครับ`);
+		window.location.href = `/blog/${slug}`;
     }
   }
 

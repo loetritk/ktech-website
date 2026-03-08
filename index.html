@@ -698,14 +698,14 @@
       .mim-header-layout { grid-template-columns: 1fr; }
       .mim-features { grid-template-columns: 1fr; }
       .connector-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+      .defender-hero { grid-template-columns: 1fr; }
       .defender-product-grid { grid-template-columns: repeat(2, 1fr); }
       .defender-features { grid-template-columns: 1fr; }
       .intune-layout { grid-template-columns: 1fr; }
       .intune-features { grid-template-columns: 1fr; }
       .solution-strip { padding: 40px 24px; }
       .solution-logos { gap: 12px; }
-      nav { padding: 16px 24px; }
+      nav { padding: 16px 20px; }
       .nav-links { display: none; }
       section { padding: 72px 24px; }
       .hero { padding: 120px 24px 60px; }
@@ -719,6 +719,220 @@
       .expertise-strip { padding: 48px 24px; }
       .expertise-inner { flex-direction: column; gap: 32px; }
       .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* ════════════════════════════════════════
+       MOBILE RESPONSIVE — Complete
+    ════════════════════════════════════════ */
+
+    /* ── Hamburger Menu ── */
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; background: none; border: none;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,22,40,0.98);
+      backdrop-filter: blur(20px);
+      z-index: 150;
+      flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-drawer.open {
+      display: flex; opacity: 1; pointer-events: all;
+    }
+    .mobile-drawer ul {
+      list-style: none; text-align: center;
+      display: flex; flex-direction: column; gap: 8px;
+      width: 100%; padding: 0 40px;
+    }
+    .mobile-drawer ul li a {
+      display: block; padding: 16px 24px;
+      color: var(--text); text-decoration: none;
+      font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      border-radius: 12px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .mobile-drawer ul li a:hover { background: rgba(21,101,192,0.15); color: var(--blue-light); }
+    .mobile-drawer-cta {
+      margin-top: 24px;
+      background: var(--orange); color: white;
+      border: none; padding: 16px 48px; border-radius: 10px;
+      font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700;
+      cursor: pointer; letter-spacing: 0.05em;
+    }
+    .mobile-drawer-close {
+      position: absolute; top: 20px; right: 20px;
+      background: none; border: none; color: var(--text-muted);
+      font-size: 28px; cursor: pointer; padding: 8px; line-height: 1;
+    }
+
+    /* ── Tablet (601px – 900px) ── */
+    @media (min-width: 601px) and (max-width: 900px) {
+      nav { padding: 16px 32px; }
+      .hamburger { display: flex; }
+      .nav-links { display: none !important; }
+      .nav-cta { display: none; }
+
+      section { padding: 80px 32px; }
+      .hero { padding: 130px 32px 70px; min-height: auto; }
+      .hero h1 { font-size: 42px; }
+      .hero-sub { font-size: 16px; }
+      .hero-stats { gap: 32px; }
+      .hero-visual { display: none; }
+
+      .why-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .services-grid { grid-template-columns: 1fr; gap: 20px; }
+      .service-card { padding: 28px; }
+
+      .defender-hero { grid-template-columns: 1fr; gap: 32px; }
+      .defender-product-grid { grid-template-columns: repeat(3, 1fr); }
+      .defender-features { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+      .intune-layout { grid-template-columns: 1fr; gap: 32px; }
+      .intune-device-grid { grid-template-columns: repeat(2, 1fr); }
+      .intune-features { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+      .mim-header-layout { grid-template-columns: 1fr; gap: 32px; }
+      .sync-flow { flex-wrap: nowrap; }
+      .mim-features { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .connector-grid { grid-template-columns: repeat(3, 1fr); }
+
+      .process-steps { flex-direction: row; flex-wrap: wrap; }
+      .process-steps::before { display: none; }
+      .step { flex: 1 1 40%; }
+
+      .contact-layout { grid-template-columns: 1fr; gap: 32px; }
+      .form-row { grid-template-columns: repeat(2, 1fr); }
+
+      .expertise-inner { flex-direction: column; gap: 24px; }
+      .solution-logos { justify-content: center; }
+
+      footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 32px; }
+    }
+
+    /* ── Mobile (≤ 600px) ── */
+    @media (max-width: 600px) {
+      nav { padding: 14px 16px; }
+      .hamburger { display: flex; }
+      .nav-links { display: none !important; }
+      .nav-cta { display: none; }
+      .nav-logo img { height: 36px; }
+
+      section { padding: 64px 16px; }
+
+      /* Hero */
+      .hero { padding: 100px 16px 56px; min-height: auto; }
+      .hero h1 { font-size: clamp(28px, 8vw, 38px); line-height: 1.1; }
+      .hero-badge { font-size: 11px; padding: 5px 12px; }
+      .hero-sub { font-size: 15px; line-height: 1.65; }
+      .hero-actions { flex-direction: column; gap: 12px; }
+      .btn-primary, .btn-secondary { width: 100%; text-align: center; padding: 15px 24px; font-size: 14px; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+      .stat-num { font-size: 28px; }
+      .hero-visual { display: none; }
+
+      /* Why Purview */
+      .why-grid { grid-template-columns: 1fr; gap: 14px; }
+      .why-card { padding: 24px 20px; }
+      .why-icon { width: 44px; height: 44px; font-size: 20px; }
+
+      /* Section titles */
+      .section-title { font-size: clamp(22px, 6vw, 32px); }
+      .section-sub { font-size: 15px; }
+
+      /* Expertise strip */
+      .expertise-strip { padding: 40px 16px; }
+      .expertise-inner { flex-direction: column; gap: 20px; }
+      .expertise-text h2 { font-size: 22px; }
+      .expertise-pills { gap: 8px; }
+      .pill { font-size: 11px; padding: 8px 14px; }
+
+      /* Services */
+      .services-grid { grid-template-columns: 1fr; gap: 16px; }
+      .service-card { flex-direction: column; gap: 12px; padding: 24px 20px; }
+      .service-num { font-size: 32px; }
+      .service-tags { gap: 6px; }
+      .tag { font-size: 11px; }
+
+      /* Defender */
+      .defender-hero { grid-template-columns: 1fr; gap: 28px; }
+      .defender-product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .def-product { padding: 14px 10px; }
+      .def-product-icon { font-size: 22px; }
+      .defender-features { grid-template-columns: 1fr; gap: 14px; }
+      .def-feature { padding: 22px 18px; }
+
+      /* Intune */
+      .intune-layout { grid-template-columns: 1fr; gap: 28px; }
+      .intune-device-grid { grid-template-columns: 1fr; gap: 10px; }
+      .intune-features { grid-template-columns: 1fr; gap: 14px; }
+      .intune-feature { padding: 22px 18px; }
+
+      /* MIM */
+      .mim-header-layout { grid-template-columns: 1fr; gap: 28px; }
+      .sync-flow { flex-direction: column; gap: 12px; align-items: stretch; }
+      .sync-arrow-col { display: none; }
+      .sync-center { padding: 14px; }
+      .sync-center-icon { font-size: 22px; }
+      .mim-features { grid-template-columns: 1fr; gap: 14px; }
+      .mim-feature { padding: 22px 18px; }
+      .connector-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .connector-card { padding: 16px 12px; }
+      .connector-icon { font-size: 24px; }
+      .connector-name { font-size: 11px; }
+      .connector-divider-badge { font-size: 10px; padding: 5px 12px; white-space: normal; text-align: center; }
+
+      /* Process */
+      .process-steps { flex-direction: column; gap: 24px; }
+      .process-steps::before { display: none; }
+      .step-num { width: 56px; height: 56px; font-size: 18px; }
+
+      /* Solution strip */
+      .solution-strip { padding: 36px 16px; }
+      .solution-inner h3 { font-size: 18px; }
+      .solution-logos { flex-direction: column; align-items: center; gap: 10px; }
+      .sol-logo { width: 100%; max-width: 280px; justify-content: center; }
+
+      /* Contact */
+      .contact-layout { grid-template-columns: 1fr; gap: 28px; }
+      .contact-form { padding: 24px 18px; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-group input, .form-group textarea, .form-group select { font-size: 16px; } /* prevent iOS zoom */
+      .form-submit { font-size: 14px; padding: 14px; }
+      .contact-item { font-size: 14px; }
+      .contact-item .icon { width: 36px; height: 36px; font-size: 16px; }
+
+      /* Footer */
+      footer { flex-direction: column; gap: 14px; text-align: center; padding: 32px 16px; }
+      .footer-copy { font-size: 12px; }
+      .footer-ms { flex-wrap: wrap; justify-content: center; }
+      .ms-badge { font-size: 11px; padding: 5px 10px; }
+    }
+
+    /* ── Very Small (≤ 380px) ── */
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 26px; }
+      .section-title { font-size: 20px; }
+      .connector-grid { grid-template-columns: 1fr; }
+      .defender-product-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -742,7 +956,27 @@
     <li><a href="#contact">ติดต่อ</a></li>
   </ul>
   <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">ปรึกษาฟรี</button>
+  <!-- Hamburger (mobile only) -->
+  <button class="hamburger" id="hamburger" aria-label="เปิดเมนู">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <button class="mobile-drawer-close" id="drawerClose" aria-label="ปิดเมนู">✕</button>
+  <ul>
+    <li><a href="#why" onclick="closeDrawer()">🔒 Microsoft Purview</a></li>
+    <li><a href="#defender" onclick="closeDrawer()">🛡️ Defender</a></li>
+    <li><a href="#intune" onclick="closeDrawer()">📱 Intune</a></li>
+    <li><a href="#mim" onclick="closeDrawer()">⚙️ Identity Manager</a></li>
+    <li><a href="#services" onclick="closeDrawer()">📋 บริการ</a></li>
+    <li><a href="#contact" onclick="closeDrawer()">📞 ติดต่อ</a></li>
+  </ul>
+  <button class="mobile-drawer-cta" onclick="closeDrawer(); document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+    ปรึกษาฟรี →
+  </button>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1552,7 +1786,57 @@
     document.getElementById('formSuccess').style.display = 'block';
   }
 
-  // Scroll reveal
+  // ── Hamburger Menu ──
+  const hamburger = document.getElementById('hamburger');
+  const drawer    = document.getElementById('mobileDrawer');
+  const drawerClose = document.getElementById('drawerClose');
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    hamburger.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', () => {
+    drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+  drawerClose.addEventListener('click', closeDrawer);
+  drawer.addEventListener('click', (e) => { if (e.target === drawer) closeDrawer(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+
+  // ── Active Nav Highlight on Scroll ──
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a, .mobile-drawer a');
+  const observer2 = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.style.color = '';
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.style.color = 'var(--white)';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => observer2.observe(s));
+
+  // ── Smooth scroll offset for fixed nav ──
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {

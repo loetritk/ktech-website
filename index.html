@@ -2038,120 +2038,89 @@
     });
   });
   // ════════════════════════════════════════
-  // SANITY CMS — Blog Integration
-  // ════════════════════════════════════════
+// BLOGGER API INTEGRATION
+// ════════════════════════════════════════
 
-  // ── CONFIG: แก้ไขค่านี้หลัง setup Sanity ──
-  const SANITY_PROJECT_ID = 't0alwlb8'; // เช่น 'abc123xyz'
-  const SANITY_DATASET    = 'production';
-  const SANITY_API_VER    = '2024-01-01';
-  // ──────────────────────────────────────────
+// ── CONFIG: ใส่ข้อมูลของคุณที่นี่ ──
+const BLOGGER_API_KEY = 'AIzaSyDbaWgG_uAV-xR728Dz-7DtXFe6OFNaSdA'; // ใส่ API Key จาก Google Cloud
+const BLOGGER_ID      = '3956065619991518091';  // ใส่ Blog ID ของคุณ
+// ──────────────────────────────────────────
 
-  const CATEGORY_MAP = {
-    purview:  { label: 'Microsoft Purview', icon: '🔒', cls: 'purview'  },
-    defender: { label: 'Defender',          icon: '🛡️', cls: 'defender' },
-    intune:   { label: 'Intune',            icon: '📱', cls: 'intune'   },
-    mim:      { label: 'Identity Manager',  icon: '⚙️', cls: 'mim'     },
-    general:  { label: 'ทั่วไป',            icon: '📝', cls: 'general'  },
-  };
+let allPosts = [];
+let activeFilter = 'all';
 
-  const FALLBACK_POSTS = [
-    { _id:'1', featured:true,  category:'purview',  emoji:'🔒', title:'เริ่มต้นกับ Microsoft Purview: Data Governance สำหรับองค์กรไทย',                   excerpt:'Microsoft Purview คือศูนย์กลางการบริหารข้อมูลที่ครอบคลุมทั้ง Data Governance, Compliance และ Information Protection ในที่เดียว บทความนี้จะพาคุณเริ่มต้นวางรากฐาน Data Strategy ที่แข็งแกร่ง', author:'KT', authorName:'KTech Team',    date:'1 มี.ค. 2568',  readTime:'8 นาที' },
-    { _id:'2', featured:false, category:'defender', emoji:'🛡️', title:'Microsoft Defender XDR: ป้องกันภัยคุกคามแบบ 360°',                                 excerpt:'รู้จัก Extended Detection & Response และวิธีที่ Defender XDR ช่วยองค์กรตอบสนองต่อภัยคุกคามได้เร็วขึ้นกว่า 90%',                               author:'ST', authorName:'Security Team',  date:'15 ก.พ. 2568', readTime:'6 นาที' },
-    { _id:'3', featured:false, category:'intune',   emoji:'📱', title:'จัดการอุปกรณ์ BYOD ด้วย Microsoft Intune อย่างปลอดภัย',                            excerpt:'นโยบาย BYOD กำลังเป็นที่นิยมในองค์กรไทย — เรียนรู้วิธีแยก Corporate Data ออกจาก Personal App ด้วย MAM Policy',                               author:'IT', authorName:'Intune Team',    date:'5 ก.พ. 2568',  readTime:'5 นาที' },
-    { _id:'4', featured:false, category:'mim',      emoji:'⚙️', title:'HR-Driven Provisioning: Auto-สร้าง AD Account จาก HRMS',                           excerpt:'ลดภาระ IT ด้วยการเชื่อม MIM กับระบบ HRMS ให้สร้าง แก้ไข และปิด Account อัตโนมัติทุกครั้งที่มีการเปลี่ยนแปลงใน HR',                         author:'MT', authorName:'MIM Team',       date:'20 ม.ค. 2568', readTime:'7 นาที' },
-    { _id:'5', featured:false, category:'purview',  emoji:'📋', title:'PDPA กับ Microsoft Purview Compliance Manager: คู่มือฉบับสมบูรณ์',                  excerpt:'ใช้ Compliance Manager ใน Purview เพื่อประเมิน Gap และติดตาม Action Items สำหรับการปฏิบัติตาม พ.ร.บ. PDPA',                               author:'KT', authorName:'KTech Team',    date:'10 ม.ค. 2568', readTime:'10 นาที' },
-    { _id:'6', featured:false, category:'general',  emoji:'🌐', title:'Zero Trust Architecture: หลักการและการนำไปใช้จริงในองค์กร',                         excerpt:'Zero Trust ไม่ใช่แค่คำโฆษณา แต่คือกลยุทธ์ความปลอดภัยที่ Microsoft แนะนำสำหรับโลก Hybrid Work ยุคใหม่',                                    author:'KT', authorName:'KTech Team',    date:'2 ม.ค. 2568',  readTime:'9 นาที' },
-  ];
+// ฟังก์ชันดึงรูปภาพแรกจากเนื้อหา Blogger (เนื่องจาก Blogger API ไม่มีฟิลด์ Featured Image โดยตรง)
+function getFirstImageUrl(content) {
+  const div = document.createElement('div');
+  div.innerHTML = content;
+  const img = div.querySelector('img');
+  return img ? img.src : null;
+}
 
-  let allPosts = [];
-  let activeFilter = 'all';
+// ฟังก์ชันล้าง Tag HTML ออกจากเนื้อหาเพื่อทำ Excerpt
+function cleanExcerpt(content, limit = 150) {
+  const text = content.replace(/<[^>]*>/g, '');
+  return text.length > limit ? text.substring(0, limit) + '...' : text;
+}
 
-  function buildCard(post, isFeatured) {
-    const cat = CATEGORY_MAP[post.category] || CATEGORY_MAP.general;
-    const imgContent = post.imageUrl
-      ? `<img src="${post.imageUrl}" alt="${post.title}" style="width:100%;height:100%;object-fit:cover;">`
-      : `<span style="position:relative;z-index:1;font-size:${isFeatured?'72px':'48px'}">${post.emoji || cat.icon}</span>`;
-    return `<div class="blog-card ${isFeatured?'blog-card-featured':''}" data-cat="${post.category}" onclick="openPost('${post._id}')">
-      <div class="blog-card-img">${imgContent}<div class="blog-card-img-overlay"></div></div>
-      <div class="blog-card-body">
-        <div class="blog-meta">
-          <span class="blog-cat ${cat.cls}">${cat.icon} ${cat.label}</span>
-          <span class="blog-date">${post.date}</span>
-          ${post.readTime ? `<span class="blog-date">· ${post.readTime}</span>` : ''}
-        </div>
-        <div class="blog-title">${post.title}</div>
-        <div class="blog-excerpt">${post.excerpt}</div>
-        <div class="blog-footer">
-          <div class="blog-author">
-            <div class="blog-avatar">${post.author}</div>
-            <span class="blog-author-name">${post.authorName}</span>
-          </div>
-          <span class="blog-read-more">อ่านต่อ →</span>
-        </div>
-      </div>
-    </div>`;
-  }
-
-  function renderPosts(posts) {
-    const grid = document.getElementById('blogGrid');
-    if (!posts || posts.length === 0) {
-      grid.innerHTML = `<div class="blog-state"><div class="blog-state-icon">📭</div><div class="blog-state-title">ยังไม่มีบทความ</div><p>เริ่มเขียนบทความแรกใน Sanity Studio ได้เลย</p></div>`;
-      return;
-    }
-    grid.innerHTML = posts.map((p, i) => buildCard(p, i === 0 && activeFilter === 'all')).join('');
-  }
-
-  function filterBlog(cat, btn) {
-    activeFilter = cat;
-    document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderPosts(cat === 'all' ? allPosts : allPosts.filter(p => p.category === cat));
-  }
-
-  function openPost(id) {
-    const post = allPosts.find(p => p._id === id);
-    if (post) {
-      const slug = post.slug || post._id;
-      // เมื่อ Setup Sanity แล้ว เปลี่ยนเป็น: window.location.href = `/blog/${slug}`;
-      //alert(`📖 "${post.title}"\n\nSetup Sanity CMS แล้ว uncomment บรรทัด redirect ใน openPost() ครับ`);
-		window.location.href = `/blog/${slug}`;
-    }
-  }
-
-  async function fetchSanityPosts() {
-    if (SANITY_PROJECT_ID === 'YOUR_PROJECT_ID') {
-      document.getElementById('sanityNotice').style.display = 'block';
-      allPosts = FALLBACK_POSTS;
-      renderPosts(allPosts);
-      return;
-    }
-    try {
-      const query = encodeURIComponent(`*[_type=="post"]|order(publishedAt desc)[0..8]{_id,title,excerpt,publishedAt,category,"slug":slug.current,"author":author->name,"authorInitials":author->initials,"imageUrl":mainImage.asset->url,readTime}`);
-      const res  = await fetch(`https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VER}/data/query/${SANITY_DATASET}?query=${query}`);
-      const data = await res.json();
-      if (data.result?.length > 0) {
-        allPosts = data.result.map(p => ({
-          _id: p._id, slug: p.slug, category: p.category || 'general',
-          emoji: CATEGORY_MAP[p.category]?.icon || '📝',
-          title: p.title, excerpt: p.excerpt || '',
-          author: (p.authorInitials || p.author?.slice(0,2) || 'KT').toUpperCase(),
-          authorName: p.author || 'KTech Team',
-          date: p.publishedAt ? new Date(p.publishedAt).toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'numeric'}) : '',
-          readTime: p.readTime ? `${p.readTime} นาที` : '',
-          imageUrl: p.imageUrl || null,
-        }));
-      } else {
-        allPosts = FALLBACK_POSTS;
-      }
-    } catch(e) {
-      console.warn('Sanity fetch error:', e);
-      allPosts = FALLBACK_POSTS;
-    }
+async function fetchBloggerPosts() {
+  // แสดง Skeleton ระหว่างโหลด (มีอยู่ใน HTML เดิมแล้ว)
+  
+  if (BLOGGER_API_KEY === 'YOUR_API_KEY_HERE') {
+    console.warn('Blogger API Key not set. Using fallback posts.');
+    allPosts = FALLBACK_POSTS;
     renderPosts(allPosts);
+    return;
   }
 
-  fetchSanityPosts();
+  try {
+    // ดึงโพสต์ล่าสุด 9 โพสต์
+    const url = `https://www.googleapis.com/blogger/v3/blogs/${BLOGGER_ID}/posts?key=${BLOGGER_API_KEY}&maxResults=9&fields=items(id,title,content,published,labels,url,author)`;
+    
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.items && data.items.length > 0) {
+      allPosts = data.items.map(p => {
+        // ดึงหมวดหมู่จาก Label แรกของ Blogger
+        const categoryLabel = p.labels && p.labels.length > 0 ? p.labels[0].toLowerCase() : 'general';
+        // ตรวจสอบว่าหมวดหมู่ตรงกับ CATEGORY_MAP ไหม ถ้าไม่ให้ลง general
+        const finalCategory = CATEGORY_MAP[categoryLabel] ? categoryLabel : 'general';
+
+        return {
+          _id: p.id,
+          url: p.url, // เก็บ URL จริงของ Blogger ไว้
+          category: finalCategory,
+          emoji: CATEGORY_MAP[finalCategory]?.icon || '📝',
+          title: p.title,
+          excerpt: cleanExcerpt(p.content),
+          author: p.author.displayName.slice(0, 2).toUpperCase(),
+          authorName: p.author.displayName,
+          date: new Date(p.published).toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' }),
+          imageUrl: getFirstImageUrl(p.content), // ดึงรูปแรกจากในโพสต์
+          readTime: Math.ceil(p.content.split(' ').length / 200) + ' นาที' // คำนวณเวลาอ่านคร่าวๆ
+        };
+      });
+    } else {
+      allPosts = FALLBACK_POSTS;
+    }
+  } catch (e) {
+    console.error('Blogger Fetch Error:', e);
+    allPosts = FALLBACK_POSTS;
+  }
+  renderPosts(allPosts);
+}
+
+// แก้ไขฟังก์ชันเปิดโพสต์ให้ Link ไปที่ Blogger
+function openPost(id) {
+  const post = allPosts.find(p => p._id === id);
+  if (post && post.url) {
+    window.open(post.url, '_blank'); // เปิดหน้า Blogger ใน Tab ใหม่
+  }
+}
+
+// เปลี่ยนคำสั่งรันตอนท้าย
+fetchBloggerPosts();
 
   // ── Scroll reveal
   const observer = new IntersectionObserver((entries) => {

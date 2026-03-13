@@ -2037,19 +2037,36 @@
       }
     });
   });
-  // ════════════════════════════════════════
-// BLOGGER API INTEGRATION
+// ════════════════════════════════════════
+// BLOGGER API INTEGRATION (UPDATED)
 // ════════════════════════════════════════
 
-// ── CONFIG: ใส่ข้อมูลของคุณที่นี่ ──
-const BLOGGER_API_KEY = 'AIzaSyDbaWgG_uAV-xR728Dz-7DtXFe6OFNaSdA'; // ใส่ API Key จาก Google Cloud
-const BLOGGER_ID      = '3956065619991518091';  // ใส่ Blog ID ของคุณ
-// ──────────────────────────────────────────
+const BLOGGER_API_KEY = 'AIzaSyDbaWgG_uAV-xR728Dz-7DtXFe6OFNaSdA'; 
+const BLOGGER_ID      = '3956065619991518091';  
+
+// ต้องเพิ่มหมวดหมู่เพื่อให้ Code รู้จัก Label ใน Blogger
+const CATEGORY_MAP = {
+  purview:  { label: 'Purview', cls: 'purview', icon: '🔒' },
+  defender: { label: 'Defender', cls: 'defender', icon: '🛡️' },
+  intune:   { label: 'Intune', cls: 'intune', icon: '📱' },
+  mim:      { label: 'Identity', cls: 'mim', icon: '⚙️' },
+  general:  { label: 'ทั่วไป', cls: 'general', icon: '📝' }
+};
+
+// ข้อมูลสำรองกรณีเชื่อมต่อ API ไม่ได้
+const FALLBACK_POSTS = [{
+  _id: '1',
+  title: 'ยินดีต้อนรับสู่ KTech Blog',
+  excerpt: 'กำลังรอการเชื่อมต่อข้อมูลจาก Blogger...',
+  category: 'general',
+  emoji: '📝',
+  authorName: 'Admin',
+  date: new Date().toLocaleDateString('th-TH'),
+  url: '#'
+}];
 
 let allPosts = [];
-let activeFilter = 'all';
 
-// ฟังก์ชันดึงรูปภาพแรกจากเนื้อหา Blogger (เนื่องจาก Blogger API ไม่มีฟิลด์ Featured Image โดยตรง)
 function getFirstImageUrl(content) {
   const div = document.createElement('div');
   div.innerHTML = content;
@@ -2057,86 +2074,102 @@ function getFirstImageUrl(content) {
   return img ? img.src : null;
 }
 
-// ฟังก์ชันล้าง Tag HTML ออกจากเนื้อหาเพื่อทำ Excerpt
 function cleanExcerpt(content, limit = 150) {
   const text = content.replace(/<[^>]*>/g, '');
   return text.length > limit ? text.substring(0, limit) + '...' : text;
 }
 
-async function fetchBloggerPosts() {
-  // แสดง Skeleton ระหว่างโหลด (มีอยู่ใน HTML เดิมแล้ว)
-  
-  if (BLOGGER_API_KEY === 'YOUR_API_KEY_HERE') {
-    console.warn('Blogger API Key not set. Using fallback posts.');
-    allPosts = FALLBACK_POSTS;
-    renderPosts(allPosts);
+// --- เพิ่มฟังก์ชันแสดงผล Card ลงใน HTML ---
+function renderPosts(posts) {
+  const grid = document.getElementById('blogGrid');
+  if (!grid) return;
+
+  if (posts.length === 0) {
+    grid.innerHTML = '<div class="blog-state"><div class="blog-state-title">ไม่พบโพสต์ที่ต้องการ</div></div>';
     return;
   }
 
-  try {
-    // ดึงโพสต์ล่าสุด 9 โพสต์
-    const url = `https://www.googleapis.com/blogger/v3/blogs/${BLOGGER_ID}/posts?key=${BLOGGER_API_KEY}&maxResults=9&fields=items(id,title,content,published,labels,url,author)`;
+  grid.innerHTML = posts.map((post, index) => {
+    const isFeatured = index === 0 ? 'blog-card-featured' : '';
+    const cat = CATEGORY_MAP[post.category] || CATEGORY_MAP.general;
     
+    return `
+      <div class="blog-card ${isFeatured}" onclick="window.open('${post.url}', '_blank')">
+        <div class="blog-card-img">
+          ${post.imageUrl ? `<img src="${post.imageUrl}" style="width:100%;height:100%;object-fit:cover;">` : `<span>${cat.icon}</span>`}
+          <div class="blog-card-img-overlay"></div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-meta">
+            <span class="blog-cat ${post.category}">${cat.label}</span>
+            <span class="blog-date">${post.date}</span>
+          </div>
+          <h3 class="blog-title">${post.title}</h3>
+          <p class="blog-excerpt">${post.excerpt}</p>
+          <div class="blog-footer">
+            <div class="blog-author">
+              <div class="blog-avatar">${post.authorName ? post.authorName.charAt(0) : 'K'}</div>
+              <span class="blog-author-name">${post.authorName}</span>
+            </div>
+            <span class="blog-read-more">อ่านต่อ →</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+async function fetchBloggerPosts() {
+  try {
+    const url = `https://www.googleapis.com/blogger/v3/blogs/${BLOGGER_ID}/posts?key=${BLOGGER_API_KEY}&maxResults=9`;
     const res = await fetch(url);
     const data = await res.json();
 
-    if (data.items && data.items.length > 0) {
+    if (data.items) {
       allPosts = data.items.map(p => {
-        // ดึงหมวดหมู่จาก Label แรกของ Blogger
-        const categoryLabel = p.labels && p.labels.length > 0 ? p.labels[0].toLowerCase() : 'general';
-        // ตรวจสอบว่าหมวดหมู่ตรงกับ CATEGORY_MAP ไหม ถ้าไม่ให้ลง general
-        const finalCategory = CATEGORY_MAP[categoryLabel] ? categoryLabel : 'general';
+        // หา Label แรกที่ตรงกับ CATEGORY_MAP
+        const label = (p.labels || []).find(l => CATEGORY_MAP[l.toLowerCase()]);
+        const categoryKey = label ? label.toLowerCase() : 'general';
 
         return {
           _id: p.id,
-          url: p.url, // เก็บ URL จริงของ Blogger ไว้
-          category: finalCategory,
-          emoji: CATEGORY_MAP[finalCategory]?.icon || '📝',
+          url: p.url,
+          category: categoryKey,
           title: p.title,
           excerpt: cleanExcerpt(p.content),
-          author: p.author.displayName.slice(0, 2).toUpperCase(),
           authorName: p.author.displayName,
           date: new Date(p.published).toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: 'numeric' }),
-          imageUrl: getFirstImageUrl(p.content), // ดึงรูปแรกจากในโพสต์
-          readTime: Math.ceil(p.content.split(' ').length / 200) + ' นาที' // คำนวณเวลาอ่านคร่าวๆ
+          imageUrl: getFirstImageUrl(p.content)
         };
       });
+      renderPosts(allPosts);
     } else {
-      allPosts = FALLBACK_POSTS;
+      renderPosts(FALLBACK_POSTS);
     }
   } catch (e) {
     console.error('Blogger Fetch Error:', e);
-    allPosts = FALLBACK_POSTS;
-  }
-  renderPosts(allPosts);
-}
-
-// แก้ไขฟังก์ชันเปิดโพสต์ให้ Link ไปที่ Blogger
-function openPost(id) {
-  const post = allPosts.find(p => p._id === id);
-  if (post && post.url) {
-    window.open(post.url, '_blank'); // เปิดหน้า Blogger ใน Tab ใหม่
+    renderPosts(FALLBACK_POSTS);
   }
 }
 
-// เปลี่ยนคำสั่งรันตอนท้าย
+// ฟังก์ชันสำหรับปุ่ม Filter
+function filterBlog(category, btn) {
+  // เปลี่ยนสถานะปุ่ม
+  document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // กรองข้อมูล
+  if (category === 'all') {
+    renderPosts(allPosts);
+  } else {
+    const filtered = allPosts.filter(p => p.category === category);
+    renderPosts(filtered);
+  }
+}
+
+// เริ่มโหลดข้อมูล
 fetchBloggerPosts();
 
-  // ── Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.why-card, .service-card, .step, .def-feature, .def-product, .intune-feature, .intune-device, .mim-feature, .connector-card').forEach(el => {    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-  });
 </script>
 </body>
 </html>

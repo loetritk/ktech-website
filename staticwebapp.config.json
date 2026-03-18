@@ -1,6 +1,10 @@
 {
   "routes": [
     {
+      "route": "/api/*",
+      "allowedRoles": ["anonymous"]
+    },
+    {
       "route": "/blog/*",
       "serve": "/blog/index.html",
       "statusCode": 200
@@ -9,11 +13,7 @@
       "route": "/*",
       "serve": "/index.html",
       "statusCode": 200
-    },
-    {
-      "route": "/api/*",
-      "allowedRoles": ["anonymous"]
-    }
+    }    
   ],
   "navigationFallback": {
     "rewrite": "/index.html"

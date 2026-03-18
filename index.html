@@ -2039,10 +2039,9 @@
   });
 
   // ════════════════════════════════════════
-  // BLOGGER — เรียกผ่าน Azure Function (ไม่มี Key ใน HTML)
+  // BLOGGER
   // ════════════════════════════════════════
 
-  // FIX 4: key ต้องเป็น lowercase ทั้งหมด เพราะ matching ใช้ .toLowerCase()
   const CATEGORY_MAP = {
     purview:      { label: 'Purview',       cls: 'purview',      icon: '🔒' },
     defender:     { label: 'Defender',      cls: 'defender',     icon: '🛡️' },
@@ -2119,14 +2118,9 @@
     }).join('');
   }
 
-  // FIX 1+2+3: รวมทุกอย่างไว้ใน async function เดียว
-  // ลบ BLOGGER_API_KEY / BLOGGER_ID ออกแล้ว — Key อยู่ใน Azure Function เท่านั้น
   async function fetchBloggerPosts() {
     try {
-      // เรียกผ่าน Azure Function ที่เก็บ Key ไว้ฝั่ง server
       const response = await fetch('/api/getBlogPosts');
-
-      // FIX 5: ตรวจสอบ HTTP status ก่อน parse JSON
       if (!response.ok) {
         throw new Error(`API Error: ${response.status} ${response.statusText}`);
       }
@@ -2135,7 +2129,6 @@
 
       if (data.items && data.items.length > 0) {
         allPosts = data.items.map(p => {
-          // FIX 4: .toLowerCase() จะ match กับ key ใน CATEGORY_MAP ที่เป็น lowercase แล้ว
           const matchedLabel = (p.labels || []).find(l => CATEGORY_MAP[l.toLowerCase()]);
           const categoryKey  = matchedLabel ? matchedLabel.toLowerCase() : 'general';
 
@@ -2169,7 +2162,6 @@
     renderPosts(category === 'all' ? allPosts : allPosts.filter(p => p.category === category));
   }
 
-  // เริ่มโหลด
   fetchBloggerPosts();
 </script>
 </body>

@@ -2041,8 +2041,11 @@
 // BLOGGER API INTEGRATION (UPDATED)
 // ════════════════════════════════════════
 
-const BLOGGER_API_KEY = 'AIzaSyDbaWgG_uAV-xR728Dz-7DtXFe6OFNaSdA'; 
-const BLOGGER_ID      = '3956065619991518091';  
+//const BLOGGER_API_KEY = 'AIzaSyDbaWgG_uAV-xR728Dz-7DtXFe6OFNaSdA'; 
+//const BLOGGER_ID      = '3956065619991518091';  
+const res = await fetch('/api/getBlogPosts');
+const data = await res.json();	
+
 
 // ต้องเพิ่มหมวดหมู่เพื่อให้ Code รู้จัก Label ใน Blogger
 const CATEGORY_MAP = {
@@ -2050,6 +2053,8 @@ const CATEGORY_MAP = {
   defender: { label: 'Defender', cls: 'defender', icon: '🛡️' },
   intune:   { label: 'Intune', cls: 'intune', icon: '📱' },
   mim:      { label: 'Identity', cls: 'mim', icon: '⚙️' },
+  Cybersecurity: { label: 'Cybersecurity', cls: 'cybersecurity', icon: '🔒' },
+  ManageEngine: { label: 'ManageEngine', cls: 'manageengine', icon: '⚙️' },
   general:  { label: 'ทั่วไป', cls: 'general', icon: '📝' }
 };
 
